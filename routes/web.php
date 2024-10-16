@@ -13,3 +13,5 @@ Route::get('/lihat-barang', function () {
 });
 
 Route::resource('/brands', \App\Http\Controllers\BrandController::class);
+
+Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
