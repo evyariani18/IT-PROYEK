@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [],
+  content: [
+    './resource/views/index.blade.php',
+    './resource/views/create.blade.php',
+    './resource/views/index.blade.php',
+  ],
   theme: {
     extend: {},
   },
