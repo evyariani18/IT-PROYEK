@@ -15,6 +15,4 @@ Route::get('/lihat-barang', function () {
 
 Route::resource('/brands', \App\Http\Controllers\BrandController::class);
 
-Route::get('/', [DashboardController::class, 'home']);
-Route::get('tentang', [DashboardController::class, 'tentang']);
-Route::get('kontak', [DashboardController::class, 'kontak']);
+Route::resource('/categories', \App\Http\Controllers\CategoryController::class);

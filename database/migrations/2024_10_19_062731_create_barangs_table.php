@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('image');
             $table->string('id_merek');
             $table->foreign('id_merek')->references('id_merek')->on('brands')->onUpdate('cascade')->onDelete('cascade');
-            $table->
+            $table->string('id_kategori');
+            $table->foreign('id_kategori')->references('id_kategori')->on('categories')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
