@@ -24,6 +24,7 @@
                                 <tr>
                                     <th scope="col">NAMA PENGGUNA</th>
                                     <th scope="col">EMAIL</th>
+                                    <th scope="col">USERNAME</th>
                                     <th scope="col" style="width: 20%">AKSI</th>
                                 </tr>
                             </thead>
@@ -32,6 +33,7 @@
                                     <tr>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>{{ $user->username}}</td>
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('users.destroy', $user->id) }}" method="POST">
                                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-primary">EDIT</a>

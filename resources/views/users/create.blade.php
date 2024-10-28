@@ -32,6 +32,9 @@
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" name="password" class="form-control" required>
+                                @error('password')
+                                <div class="text-danger">{{ $message }}</div>
+                                 @enderror
                             </div>
                             <button type="submit" class="btn btn-success">SIMPAN</button>
                             <a href="{{ route('users.index') }}" class="btn btn-secondary">KEMBALI</a>
