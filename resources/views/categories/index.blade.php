@@ -22,17 +22,19 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
+                                    <th scope="col1">NO.</th>
                                     <th scope="col">JENIS KATEGORI</th>
                                     <th scope="col" style="width: 20%">AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($categories as $item)
+                                @forelse ($categories as $index => $item)
                                     <tr>
+                                        <td>{{$index + 1}}</td>
                                         <td>{{ $item->name }}</td>
                                         <td class="text-center">
-                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('categories.destroy', $item->id) }}" method="POST">
-                                                <a href="{{ route('categories.edit', $item->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('categories.destroy', $item->id_kategori) }}" method="POST">
+                                                <a href="{{ route('categories.edit', $item->id_kategori) }}" class="btn btn-sm btn-primary">EDIT</a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>

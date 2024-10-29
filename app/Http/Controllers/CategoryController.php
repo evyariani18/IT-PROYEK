@@ -40,34 +40,43 @@ class CategoryController extends Controller{
             'name' => 'required|string|max:255',
         ]);
 
+        $lastCategory = Category::OrderBy('id_kategori', 'desc')->first();
+        $newIdKategori = $lastCategory ? 'K' . str_pad((intval(substr($lastCategory->id_kategori, 1)) + 1), 3, '0', STR_PAD_LEFT) : 'K001';
+
+
+        // Menyimpan ke database
+
+
         Category::create([
+            'id_kategori' => $newIdKategori, // Menetapkan ID yang baru dibuat
             'name' => $request->name,
+            
         ]);
 
         return redirect()->route('categories.index')->with('success', 'Kategori berhasil ditambahkan');
     }
 
-    public function destroy($id)
+    public function destroy($id_kategori)
     {
-        $categories = Category::findOrFail($id);
+        $categories = Category::findOrFail($id_kategori);
         $categories->delete();
 
         return redirect()->route('categories.index')->with('success', 'Kategori berhasil dihapus');
     }
 
-    public function edit($id)
+    public function edit($id_kategori)
     {
-        $categories = Category::findOrFail($id);
+        $categories = Category::findOrFail($id_kategori);
         return view('categories.edit', compact('categories'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_kategori)
     {
         $request->validate([
             'name' => 'required|string|max:255',
         ]);
 
-        $categories = Category::findOrFail($id);
+        $categories = Category::findOrFail($id_kategori);
         $categories->update([
             'name' => $request->name,
         ]);

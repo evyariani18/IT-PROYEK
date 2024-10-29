@@ -19,14 +19,14 @@
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
                         <a href="{{ route('categories.index') }}" class="btn btn-md btn-secondary mb-3">KEMBALI</a>
-                        <form action="{{ route('categories.update', $categories->id) }}" method="POST">
+                        <form action="{{ route('categories.update', $categories->id_kategori) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama Merek</label>
                                 <input type="text" class="form-control" id="title" name="name" value="{{ $categories->name }}" required>
                             </div>
-                            <button type="submit" class="btn btn-md btn-success">SIMPAN</button>
+                            <button type="submit" class="btn btn-md btn-primary">UPDATE</button>
                         </form>
                     </div>
                 </div>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Data Merek Barang</title>
+    <title>Data Barang Masuk</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body style="background: #D6C0B3">
@@ -18,23 +18,33 @@
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('brands.create') }}" class="btn btn-md btn-success mb-3">TAMBAH MEREK</a>
+                        <a href="{{ route('barang_masuk.create') }}" class="btn btn-md btn-success mb-3">TAMBAH BARANG MASUK</a>
+                       <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="col">NO</th>
-                                    <th scope="col">NAMA MEREK</th>
+                                    <th scope="col">NAMA BARANG</th>
+                                    <th scope="col">JUMLAH</th>
+                                    <th scope="col">HARGA SATUAN</th>
+                                    <th scope="col">HARGA TOTAL</th>
+                                    <th scope="col">SUPPLIER</th>
                                     <th scope="col" style="width: 20%">AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($brands as $index => $item)
+                                @forelse ($barangmasuk as $index => $item)
                                     <tr>
-                                        <td>{{ $index + 1}}</td>
-                                        <td>{{ $item->title }}</td>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $item->barang->name }}</td>
+                                        <td>{{ $item->jumlah }}</td>
+                                        <td>Rp {{ $item->harga_satuan}}</td>
+                                        <td>Rp {{ $item->harga_total}}</td>
+                                        <td>{{ $item->supplier}}</td>
+                                        <td>{{ $item->tanggal_masuk }}</td>
                                         <td class="text-center">
-                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('brands.destroy', $item->id_merek) }}" method="POST">
-                                                <a href="{{ route('brands.edit', $item->id_merek) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                            <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('barang_masuk.destroy', $item->id_masuk) }}" method="POST">
+                                                <a href="{{ route('barang_masuk.edit', $item->id_masuk) }}" class="btn btn-sm btn-primary">EDIT</a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
@@ -43,12 +53,13 @@
                                     </tr>
                                 @empty
                                     <div class="alert alert-danger">
-                                        Data Merek belum Tersedia.
+                                        Data Barang belum tersedia.
                                     </div>
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $brands->links() }}
+                        </div>
+                        {{ $barangmasuk->links() }}
                     </div>
                 </div>
             </div>
@@ -59,7 +70,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        //message with sweetalert
+        // pesan dengan sweetalert
         @if(session('success'))
             Swal.fire({
                 icon: "success",
@@ -77,8 +88,6 @@
                 timer: 2000
             });
         @endif
-
     </script>
-
 </body>
 </html>

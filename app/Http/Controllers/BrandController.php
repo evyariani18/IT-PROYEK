@@ -43,34 +43,44 @@ class BrandController extends Controller
             'title' => 'required|string|max:255',
         ]);
 
+        //Inputan merek terakhir
+        $lastBrand = Brand::OrderBy('id_merek', 'desc')->first();
+        $newIdMerek = $lastBrand ? 'M' . str_pad((intval(substr($lastBrand->id_merek, 1)) + 1), 3, '0', STR_PAD_LEFT) : 'M001';
+
+
+        // Menyimpan ke database
+
+
         Brand::create([
+            'id_merek' => $newIdMerek, // Menetapkan ID yang baru dibuat
             'title' => $request->title,
+            
         ]);
 
         return redirect()->route('brands.index')->with('success', 'Merek berhasil ditambahkan');
     }
 
-    public function destroy($id)
+    public function destroy($id_merek)
     {
-        $brands = Brand::findOrFail($id);
+        $brands = Brand::findOrFail($id_merek);
         $brands->delete();
 
         return redirect()->route('brands.index')->with('success', 'Merek berhasil dihapus');
     }
 
-    public function edit($id)
+    public function edit($id_merek)
     {
-        $brands = Brand::findOrFail($id);
+        $brands = Brand::findOrFail($id_merek);
         return view('brands.edit', compact('brands'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_merek)
     {
         $request->validate([
             'title' => 'required|string|max:255',
         ]);
 
-        $brands = Brand::findOrFail($id);
+        $brands = Brand::findOrFail($id_merek);
         $brands->update([
             'title' => $request->title,
         ]);
