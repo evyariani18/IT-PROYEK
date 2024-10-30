@@ -25,31 +25,38 @@
             <div class="card-body">
                 <form action="{{ route('transaksi.store') }}" method="POST">
                     @csrf
+                    
                     <div class="mb-3">
-                        <label for="id_barang" class="form-label">Nama Barang</label>
-                        <select name="id_barang" id="id_barang" class="form-select" required>
-                            <option value="">Pilih Barang</option>
-                            @foreach($barangs as $barang)
-                                <option value="{{ $barang->id }}">{{ $barang->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+    <label for="id_barang" class="form-label">Nama Barang</label>
+    <select name="id_barang" id="id_barang" class="form-control" required>
+        <option value="">Pilih Barang</option>
+        @foreach($barangs as $barang) <!-- Menggunakan variabel $barangs -->
+            <option value="{{ $barang->id_barang }}">{{ $barang->name }}</option>
+        @endforeach
+    </select>
+</div>
+
+                    
                     <div class="mb-3">
                         <label for="jumlah" class="form-label">Jumlah</label>
                         <input type="number" name="jumlah" id="jumlah" class="form-control" required min="1">
                     </div>
+                    
                     <div class="mb-3">
                         <label for="harga_satuan" class="form-label">Harga Satuan</label>
                         <input type="number" name="harga_satuan" id="harga_satuan" class="form-control" required min="0" step="0.01">
                     </div>
+                    
                     <div class="mb-3">
                         <label for="tanggal_transaksi" class="form-label">Tanggal Transaksi</label>
                         <input type="date" name="tanggal_transaksi" id="tanggal_transaksi" class="form-control" required>
                     </div>
+                    
                     <div class="mb-3">
                         <label for="keterangan" class="form-label">Keterangan</label>
                         <textarea name="keterangan" id="keterangan" class="form-control" rows="3"></textarea>
                     </div>
+                    
                     <button type="submit" class="btn btn-success">Simpan</button>
                     <a href="{{ route('transaksi.index') }}" class="btn btn-secondary">Kembali</a>
                 </form>

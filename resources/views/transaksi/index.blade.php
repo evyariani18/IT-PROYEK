@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Transaksi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body style="background: #F8F9FA">
 
@@ -29,7 +30,7 @@
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
-                                <th>Nama Barang</th>
+                                <th>ID Transaksi</th>
                                 <th>Jumlah</th>
                                 <th>Harga Satuan</th>
                                 <th>Harga Total</th>
@@ -42,15 +43,15 @@
                             @forelse ($transaksis as $index => $item)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $item->barang->name }}</td>
+                                    <td>{{ $item->id_transaksi }}</td>
                                     <td>{{ $item->jumlah }}</td>
                                     <td>{{ number_format($item->harga_satuan, 2) }}</td>
                                     <td>{{ number_format($item->harga_total, 2) }}</td>
                                     <td>{{ \Carbon\Carbon::parse($item->tanggal_transaksi)->format('d M Y') }}</td>
                                     <td>{{ $item->keterangan }}</td>
                                     <td class="text-center">
-                                        <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('transaksi.destroy', $item->id) }}" method="POST">
-                                            <a href="{{ route('transaksi.edit', $item->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                        <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('transaksi.destroy', $item->id_transaksi) }}" method="POST">
+                                            <a href="{{ route('transaksi.edit', $item->id_transaksi) }}" class="btn btn-primary btn-sm">Edit</a>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
@@ -70,7 +71,8 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
         // Menampilkan pesan dengan SweetAlert
         @if(session('success'))
             Swal.fire({

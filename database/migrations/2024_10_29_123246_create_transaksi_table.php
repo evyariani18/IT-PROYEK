@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transaksi', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_barang')->constrained('barangs')->onDelete('cascade');
-            $table->integer('jumlah');
-            $table->decimal('harga_satuan', 10, 2);
-            $table->decimal('harga_total', 10, 2);
-            $table->date('tanggal_transaksi');
-            $table->string('keterangan')->nullable();
-            $table->timestamps();
+            $table->string('id_transaksi')->primary(); // ID unik untuk transaksi
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade'); // Menambahkan foreign key untuk pengguna
+            $table->integer('jumlah'); // Jumlah barang
+            $table->decimal('harga_satuan', 10, 2); // Harga per unit
+            $table->decimal('harga_total', 10, 2); // Total harga (jumlah * harga satuan)
+            $table->date('tanggal_transaksi'); // Tanggal transaksi
+            $table->string('keterangan')->nullable(); // Keterangan tambahan
+            $table->timestamps(); // Menambahkan kolom created_at dan updated_at
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transaksi');
+        Schema::dropIfExists('transaksi'); // Menghapus tabel jika migrasi dibatalkan
     }
 };
