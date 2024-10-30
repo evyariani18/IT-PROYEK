@@ -34,6 +34,13 @@
                                 <label for="password" class="form-label">Password (Kosongkan jika tidak ingin mengubah)</label>
                                 <input type="password" name="password" class="form-control">
                             </div>
+                            <div class="mb-3">
+                                <label for="level" class="form-label">Level</label>
+                                <select name="level" id="level" class="form-control" required>
+                                    <option value="1" {{ old('level', $user->level) == 1 ? 'selected' : '' }}>1</option>
+                                    <option value="2" {{ old('level', $user->level) == 2 ? 'selected' : '' }}>2</option>
+                                </select>
+                            </div>
                             <button type="submit" class="btn btn-primary">UPDATE</button>
                             <a href="{{ route('users.index') }}" class="btn btn-secondary">KEMBALI</a>
                         </form>

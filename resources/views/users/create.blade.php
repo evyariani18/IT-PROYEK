@@ -34,7 +34,14 @@
                                 <input type="password" name="password" class="form-control" required>
                                 @error('password')
                                 <div class="text-danger">{{ $message }}</div>
-                                 @enderror
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="level" class="form-label">Level</label>
+                                <select name="level" id="level" class="form-control" required>
+                                    <option value="1" {{ old('level', 1) == 1 ? 'selected' : '' }}>1</option>
+                                    <option value="2" {{ old('level', 1) == 2 ? 'selected' : '' }}>2</option>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-success">SIMPAN</button>
                             <a href="{{ route('users.index') }}" class="btn btn-secondary">KEMBALI</a>

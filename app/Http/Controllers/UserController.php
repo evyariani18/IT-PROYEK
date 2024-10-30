@@ -26,6 +26,7 @@ class UserController extends Controller
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
+            'level' => 'required|integer', // Validasi level
         ]);
 
         // Buat pengguna baru
@@ -33,7 +34,7 @@ class UserController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
-            'level' => 1, // Level default
+            'level' => $request->level, // Simpan level dari input form
             'password' => bcrypt($request->password), // Enkripsi password
         ]);
 
@@ -54,6 +55,7 @@ class UserController extends Controller
             'username' => 'required|string|max:255|unique:users,username,' . $user->id,
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8', // Password opsional saat update
+            'level' => 'required|integer', // Validasi level
         ]);
 
         // Update data pengguna
@@ -61,6 +63,7 @@ class UserController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
+            'level' => $request->level, // Update level
             'password' => $request->filled('password') ? bcrypt($request->password) : $user->password, // Hanya update password jika diisi
         ]);
 
