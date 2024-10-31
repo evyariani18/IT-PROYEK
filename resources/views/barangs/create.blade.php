@@ -14,6 +14,17 @@
             <div class="col-md-12">
                 <div>
                     <h3 class="text-center my-4">Tambah Barang Baru</h3>
+                    
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
                     <hr>
                 </div>
                 <div class="card border-0 shadow-sm rounded">
@@ -61,22 +72,39 @@
 
                             <div class="form-group mb-3">
                             <label for="id_merek">Merek</label>
-                            <select name="id_merek" class="form-control" required>
+                            <select name="id_merek" id="id_merek" class="form-control" required onchange="toggleTambahMerek()">
                                 <option value="">Pilih Merek</option>
                                 @foreach($brands as $brand)
                                     <option value="{{ $brand->id_merek }}">{{ $brand->title }}</option>
                                 @endforeach
+                                <option value="tambah_baru">Tambah Merek</option>
                             </select>
                         </div>
+
+                        <div id="formTambahMerek" style="display: none;">
+                            <div class="form-group mb-3">
+                                <label for="nama_merek_baru">Merek Baru</label>
+                                <input type="text" name="nama_merek_baru" class="form-control">
+                            </div>
+                        </div>
+
                         
                         <div class="form-group mb-3">
                             <label for="id_kategori">Kategori</label>
-                            <select name="id_kategori" class="form-control" required>
+                            <select name="id_kategori" id="id_kategori" class="form-control" required onchange="toggleTambahKategori()">
                                 <option value="">Pilih Kategori</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id_kategori }}">{{ $category->name }}</option>
                                 @endforeach
+                                <option value="tambah_baru">Tambah Kategori</option>
                             </select>
+                        </div>
+
+                        <div id="formTambahKategori" style="display: none;">
+                            <div class="form-group mb-3">
+                                <label for="nama_kategori_baru">Kategori Baru</label>
+                                <input type="text" name="nama_kategori_baru" class="form-control">
+                            </div>
                         </div>
 
                             <button type="submit" class="btn btn-md btn-success">SIMPAN</button>
@@ -89,6 +117,22 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script> 
+    function toggleTambahMerek() {
+        var selectMerek = document.getElementById('id_merek');
+        var formTambahMerek = document.getElementById('formTambahMerek');
+        formTambahMerek.style.display = (selectMerek.value === 'tambah_baru') ? 'block' : 'none';
+    }
+
+    function toggleTambahKategori() {
+        var selectKategori = document.getElementById('id_kategori');
+        var formTambahKategori = document.getElementById('formTambahKategori');
+        formTambahKategori.style.display = (selectKategori.value === 'tambah_baru') ? 'block' : 'none';
+    }
+</script>
+
+    </script>
 
     <script>
         //message with sweetalert

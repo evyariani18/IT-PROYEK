@@ -39,11 +39,11 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->username }}</td>
-                                        <td>********</td>
+                                        <td>{{ $user->password}}</td>
                                         <td>{{ $user->level }}</td>
                                         <td class="text-center">
-                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('users.destroy', $user->id) }}" method="POST">
-                                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-primary">
+                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('users.destroy', $user->id_user) }}" method="POST">
+                                                <a href="{{ route('users.edit', $user->id_user) }}" class="btn btn-sm btn-primary">
                                                     <i class="fas fa-edit"></i> EDIT
                                                 </a>
                                                 @csrf

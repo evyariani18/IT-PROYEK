@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->string('id_transaksi')->primary(); // ID unik untuk transaksi
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade'); // Menambahkan foreign key untuk pengguna
+            $table->string('id_barang');
+            $table->foreign('id_barang')->references('id_barang')->on('barangs')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('jumlah'); // Jumlah barang
-            $table->decimal('harga_satuan', 10, 2); // Harga per unit
-            $table->decimal('harga_total', 10, 2); // Total harga (jumlah * harga satuan)
+            $table->decimal('harga_satuan'); // Harga per unit
+            $table->decimal('harga_total'); // Total harga (jumlah * harga satuan)
             $table->date('tanggal_transaksi'); // Tanggal transaksi
             $table->string('keterangan')->nullable(); // Keterangan tambahan
             $table->timestamps(); // Menambahkan kolom created_at dan updated_at

@@ -31,10 +31,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control" required>
+                                <input type="password" name="password" class="form-control" required> 
                                 @error('password')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
+                                <div class="form-check mt-2">
+                                    <input type="checkbox" class="form-check-input" id="show-password" onclick="togglePasswordVisibility()">
+                                    <label class="form-check-label" for="show-password">Tampilkan Password</label>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="level" class="form-label">Level</label>
@@ -54,3 +58,38 @@
 
 </body>
 </html>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const passwordToggle = document.getElementById('show-password');
+            passwordInput.type = passwordToggle.checked ? 'text' : 'password';
+        }
+    </script>
+
+    <script>
+        //message with sweetalert
+        @if(session('success'))
+            Swal.fire({
+                icon: "success",
+                title: "BERHASIL",
+                text: "{{ session('success') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @elseif(session('error'))
+            Swal.fire({
+                icon: "error",
+                title: "GAGAL!",
+                text: "{{ session('error') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+
+    </script>
+
+

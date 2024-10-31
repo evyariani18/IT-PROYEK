@@ -29,8 +29,12 @@ class UserController extends Controller
             'level' => 'required|integer', // Validasi level
         ]);
 
+        $lastUser = User::OrderBy('id_user', 'desc')->first();
+        $newIdUser = $lastUser ? 'U' . str_pad((intval(substr($lastUser->id_user, 1)) + 1), 3, '0', STR_PAD_LEFT) : 'U001';
+
         // Buat pengguna baru
         User::create([
+            'id_user' => $newIdUser,
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,

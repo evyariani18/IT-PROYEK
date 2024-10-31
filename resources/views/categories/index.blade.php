@@ -34,10 +34,13 @@
                                         <td>{{ $item->name }}</td>
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('categories.destroy', $item->id_kategori) }}" method="POST">
-                                                <a href="{{ route('categories.edit', $item->id_kategori) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                                <a href="{{ route('categories.edit', $item->id_kategori) }}" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-edit"></i>EDIT</a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-trash"></i> HAPUS
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

@@ -12,16 +12,6 @@
     <div class="container mt-5">
         <h3 class="text-center my-4">Data Transaksi</h3>
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                <span class="me-2">&#10003;</span> {{ session('success') }}
-            </div>
-        @elseif (session('error'))
-            <div class="alert alert-danger">
-                <span class="me-2">&#10060;</span> {{ session('error') }}
-            </div>
-        @endif
-
         <div class="card border-0 shadow-sm rounded">
             <div class="card-body">
                 <a href="{{ route('transaksi.create') }}" class="btn btn-success mb-3">Tambah Transaksi</a>
@@ -29,25 +19,25 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr class="text-center">
-                                <th>No</th>
-                                <th>ID Transaksi</th>
-                                <th>Jumlah</th>
-                                <th>Harga Satuan</th>
-                                <th>Harga Total</th>
-                                <th>Tanggal Transaksi</th>
-                                <th>Keterangan</th>
-                                <th>Aksi</th>
+                                <th>NO</th>
+                                <th>NAMA BARANG</th>
+                                <th>JUMLAH</th>
+                                <th>HARGA SATUAN</th>
+                                <th>HARGA TOTAL</th>
+                                <th>TANGGAL TRANSAKSI</th>
+                                <th>KETERANGAN</th>
+                                <th>AKSI</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($transaksis as $index => $item)
+                            @forelse ($transaksi as $index => $item)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $item->id_transaksi }}</td>
+                                    <td>{{ $item->barang->name}}</td>
                                     <td>{{ $item->jumlah }}</td>
-                                    <td>{{ number_format($item->harga_satuan, 2) }}</td>
-                                    <td>{{ number_format($item->harga_total, 2) }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($item->tanggal_transaksi)->format('d M Y') }}</td>
+                                    <td>{{ $item->harga_satuan, 2 }}</td>
+                                    <td>{{ $item->harga_total, 2 }}</td>
+                                    <td>{{ $item->tanggal_transaksi }}</td>
                                     <td>{{ $item->keterangan }}</td>
                                     <td class="text-center">
                                         <form onsubmit="return confirm('Apakah Anda yakin?');" action="{{ route('transaksi.destroy', $item->id_transaksi) }}" method="POST">
@@ -60,13 +50,13 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center alert alert-danger">Data Transaksi belum tersedia.</td>
+                                    <div class="alert alert-danger">Data Transaksi belum tersedia.</div>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
-                {{ $transaksis->links() }} <!-- Pagination -->
+                {{ $transaksi->links() }} <!-- Pagination -->
             </div>
         </div>
     </div>

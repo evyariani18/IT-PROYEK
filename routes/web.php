@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BarangController;
-use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransaksiController; // Import TransaksiController
@@ -32,15 +31,11 @@ Route::resource('categories', CategoryController::class);
 Route::resource('barangs', BarangController::class);
 
 // Rute resource untuk barang masuk
-Route::resource('barang-masuk', BarangMasukController::class);
-
-// Rute resource untuk barang keluar
-Route::resource('barang-keluar', BarangKeluarController::class);
+Route::resource('barang_masuk', BarangMasukController::class);
 
 // Rute resource untuk transaksi
 Route::resource('transaksi', TransaksiController::class); // Rute resource untuk transaksi
 
 // Rute untuk login dan user
-Route::resource('login', LoginController::class);
 Route::resource('users', UserController::class);
 

@@ -50,7 +50,6 @@ class BrandController extends Controller
 
         // Menyimpan ke database
 
-
         Brand::create([
             'id_merek' => $newIdMerek, // Menetapkan ID yang baru dibuat
             'title' => $request->title,
