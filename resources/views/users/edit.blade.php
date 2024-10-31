@@ -15,7 +15,7 @@
                 <h3 class="text-center">Edit Pengguna</h3>
                 <div class="card border-0 shadow-sm rounded mt-4">
                     <div class="card-body">
-                        <form action="{{ route('users.update', $user->id) }}" method="POST">
+                        <form action="{{ route('users.update', $user->id_user) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">

@@ -28,7 +28,6 @@
                                     <th scope="col">NAMA PENGGUNA</th>
                                     <th scope="col">EMAIL</th>
                                     <th scope="col">USERNAME</th>
-                                    <th scope="col">PASSWORD</th>
                                     <th scope="col">LEVEL</th>
                                     <th scope="col" style="width: 20%">AKSI</th>
                                 </tr>
@@ -39,7 +38,6 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->username }}</td>
-                                        <td>{{ $user->password}}</td>
                                         <td>{{ $user->level }}</td>
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('users.destroy', $user->id_user) }}" method="POST">

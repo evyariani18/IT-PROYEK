@@ -80,22 +80,24 @@
 
         // Event listener untuk ketika barang dipilih
         idBarangSelect.addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const hargaSatuan = selectedOption.getAttribute('data-harga');
+            const selectedOptions = Array.from(this.selectedOptions);
+            const totalHargaSatuan = selectedOptions.reduce((total, option) => {
+                return total + parseFloat(option.getAttribute('data-harga')) || 0;
+            }, 0);
 
-            // Mengisi harga satuan
-            hargaSatuanInput.value = hargaSatuan;
+            // Mengisi harga satuan sebagai total harga satuan untuk barang yang dipilih
+            hargaSatuanInput.value = totalHargaSatuan;
             calculateTotal(); // Menghitung total ketika harga satuan diisi
         });
 
         // Fungsi untuk menghitung total harga
-
         jumlahInput.addEventListener('input', calculateTotal);
 
-            // Fungsi untuk menghitung total harga
-            function calculateTotal() {
-                const hargaSatuan = parseFloat(hargaSatuanInput.value) || 0;
-                const jumlah = parseInt(jumlahInput.value) || 0;
-                hargaTotalInput.value = hargaSatuan * jumlah; // Menghitung total
-            }
+        // Fungsi untuk menghitung total harga
+        function calculateTotal() {
+            const hargaSatuan = parseFloat(hargaSatuanInput.value) || 0;
+            const jumlah = parseInt(jumlahInput.value) || 0;
+            hargaTotalInput.value = hargaSatuan * jumlah; // Menghitung total
+        }
     </script>
+    
