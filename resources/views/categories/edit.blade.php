@@ -23,7 +23,7 @@
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
-                                <label for="name" class="form-label">Nama Merek</label>
+                                <label for="name" class="form-label">Nama Kategori</label>
                                 <input type="text" class="form-control" id="title" name="name" value="{{ $categories->name }}" required>
                             </div>
                             <button type="submit" class="btn btn-md btn-primary">UPDATE</button>
