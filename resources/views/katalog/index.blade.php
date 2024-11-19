@@ -28,11 +28,7 @@
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-      <style>
-        .top-box{
-            text-align: center;
-        }
-    </style>
+      
    </head>
    <!-- body -->
    <body class="main-layout">
@@ -74,11 +70,11 @@
                      <div class="limit-box">
                         <nav class="main-menu">
                            <ul class="menu-area-main">
-                              <li class="active"> <a href="beranda.html">Beranda</a> </li>
-                              <li class="active"> <a href="{{ url('tentang') }}">Tentang</a> </li>
-                              <li> <a href="produk.html">produk</a> </li>
-                              <li> <a href="blog.html"> Blog</a> </li>
-                              <li> <a href="kontak.html">Kontak</a> </li>
+                              <li class="active"><a href="/katalog">Beranda</a> </li>
+                              <li><a href="{{ route('tentang') }}">Tentang</a> </li>
+                              <li><a href="{{ route('produk') }}">Produk</a></li>
+                              <li><a href="{{ route('alamat') }}">Alamat</a></li>
+                              <li><a href="{{ route('kontak') }}">Kontak</a></li>
                                                              
                            </ul>
                         </nav>
@@ -86,12 +82,13 @@
                   </div>
                </div>
                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                  <li><a class="buy" href="#">Login</a></li>
+                  <li><a class="buy" href="/login">Login</a></li>
                </div>
             </div>
          </div>
          <!-- end header inner --> 
       </header>
+      
       <!-- end header -->
       <section class="slider_section">
     <div id="main_slider" class="carousel slide banner-main" data-ride="carousel" data-interval="3000">
@@ -106,7 +103,7 @@
                             <strong class="yellow_bold">Toko Shadad </strong></h1>
                         <p>Temukan berbagai perlengkapan rumah berkualitas tinggi di Toko Shadad. <br>
                             Kami menyediakan berbagai produk yang akan membuat rumah Anda lebih nyaman dan fungsional.</p>
-                        <a href="#">Belanja Sekarang</a>
+                        <a href="{{ url('/produk') }}">Belanja Sekarang</a>
                     </div>
                 </div>
             </div>
@@ -119,7 +116,7 @@
             <h1>Temukan <br> <strong class="black_bold">Perlengkapan </strong><br>
                 <strong class="yellow_bold">Rumah Terbaru </strong></h1>
             <p>Jelajahi berbagai produk terbaru yang akan menambah kenyamanan dan keindahan rumah Anda.</p>
-            <a href="#">Lihat Semua Produk</a>
+            <a href="/produk">Lihat Semua Produk</a>
         </div>
     </div>
 </div>
@@ -553,66 +550,72 @@
       </div>
    </div>
 </div>
-        
-                   
+    
                
                
-      <footr>
-         <div class="footer">
-            <div class="container">
-               <div class="row">
-                  <div class="col-md-6 offset-md-3">
-                     <ul class="sociel">
-                         <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                         <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
-                         <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
-                         <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
-                     </ul>
-                  </div>
+      <footer>
+   <div class="footer">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-6 offset-md-3">
+               <ul class="sociel">
+                   <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                   <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                   <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                   <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
+               </ul>
             </div>
-            <div class="row">
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                  <div class="contact">
-                     <h3>conatct us</h3>
-                     <span>123 Second Street Fifth Avenue,<br>
-                       Manhattan, New York<br>
-                        +987 654 3210</span>
-                  </div>
+         </div>
+         <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+               <div class="contact">
+                  <h3>Hubungi Kami</h3>
+                  <span>
+                     Jalan Raya No. 123<br>
+                     Kota Shadad, Indonesia<br>
+                     +62 812 3456 7890
+                  </span>
                </div>
-                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                  <div class="contact">
-                     <h3>ADDITIONAL LINKS</h3>
-                     <ul class="lik">
-                         <li> <a href="#">About us</a></li>
-                         <li> <a href="#">Terms and conditions</a></li>
-                         <li> <a href="#">Privacy policy</a></li>
-                         <li> <a href="#">News</a></li>
-                          <li> <a href="#">Contact us</a></li>
-                     </ul>
-                  </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+               <div class="contact">
+                  <h3>Link Tambahan</h3>
+                  <ul class="lik">
+                     <li><a href="#">Tentang Kami</a></li>
+                     <li><a href="#">Syarat dan Ketentuan</a></li>
+                     <li><a href="#">Kebijakan Privasi</a></li>
+                     <li><a href="#">Berita</a></li>
+                     <li><a href="#">Hubungi Kami</a></li>
+                  </ul>
                </div>
-                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                  <div class="contact">
-                     <h3>service</h3>
-                      <ul class="lik">
-                    <li> <a href="#"> Data recovery</a></li>
-                         <li> <a href="#">Computer repair</a></li>
-                         <li> <a href="#">Mobile service</a></li>
-                         <li> <a href="#">Network solutions</a></li>
-                          <li> <a href="#">Technical support</a></li>
-                  </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+               <div class="contact">
+                  <h3>Layanan</h3>
+                  <ul class="lik">
+                     <li><a href="#">Penjualan Barang</a></li>
+                     <li><a href="#">Layanan Pengiriman</a></li>
+                     <li><a href="#">Diskon Khusus</a></li>
+                     <li><a href="#">Dukungan Pelanggan</a></li>
+                  </ul>
                </div>
-                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                  <div class="contact">
-                     <h3>About lighten</h3>
-                     <span>Tincidunt elit magnis nulla facilisis. Dolor Sapien nunc amet ultrices, </span>
-                  </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+               <div class="contact">
+                  <h3>Tentang Toko Shadad</h3>
+                  <span>
+                     Toko Shadad adalah solusi belanja terpercaya dengan berbagai macam produk berkualitas untuk memenuhi kebutuhan Anda.
+                  </span>
                </div>
             </div>
          </div>
-            <div class="copyright">
-               <p>Copyright 2019 All Right Reserved By <a href="https://html.design/">Free html Templates</a> Distributed By <a href="https://themewagon.com">ThemeWagon </a></p>
-            </div>
+      </div>
+      <div class="copyright">
+         <p>Copyright © 2024 Semua Hak Cipta Dilindungi oleh Toko Shadad</p>
+      </div>
+   </div>
+</footer>
+
          
       </div>
       </footr>
