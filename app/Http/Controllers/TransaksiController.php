@@ -34,9 +34,11 @@ class TransaksiController extends Controller
             'jumlah' => 'required|integer|min:1',
             'harga_satuan' => 'required|numeric|min:0',
             'harga_total' => 'required|numeric|min:0',
-            'tanggal_transaksi' => 'required|date',
+            'tanggal_transaksi' => 'required|date|before_or_equal:today',
             'keterangan' => 'nullable|string',
         ]);
+
+        $tanggal_transaksi = $request->tanggal_transaksi ?: now()->toDateString();
 
         // Hitung total harga
         $harga_total = $request->jumlah * $request->harga_satuan;
@@ -88,6 +90,19 @@ class TransaksiController extends Controller
 
         $harga_total = $request->jumlah * $request->harga_satuan;
 
+        // Ambil data barang terkait transaksi yang akan diupdate
+        $barangs = Barang::find($request->id_barang);
+        
+        // Hitung selisih jumlah
+        $selisih = $transaksi->jumlah - $request->jumlah;
+    
+        // Jika jumlah yang diupdate lebih kecil, tambahkan stok yang dikurangi
+        if ($selisih > 0) {
+            $barangs->stok += $selisih;
+        } else {
+            // Jika jumlah yang diupdate lebih besar, kurangi stok barang
+            $barangs->stok -= ($request->jumlah - $transaksi->jumlah);
+        }
         $transaksi->update([
             'id_barang' => $request->id_barang,
             'jumlah' => $request->jumlah,
@@ -97,8 +112,6 @@ class TransaksiController extends Controller
             'keterangan' => $request->keterangan,
         ]);
 
-            $barangs = Barang::find($request->id_barang);
-            $barangs->stok -= $request->jumlah;
             $barangs->save(); // Simpan perubahan status
 
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil diperbarui.');

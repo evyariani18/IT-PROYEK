@@ -22,11 +22,6 @@ Route::get('/lihat-barang', function () {
     return view('tambah_barang'); // Sesuaikan jika diperlukan view yang berbeda
 });
 
-// Rute untuk halaman dashboard utama
-Route::get('/dashboard', [DashboardController::class, 'home'])->name('dashboard');
-
-// Rute untuk halaman dashboard tambahan
-Route::get('/dashboard2', [Dashboard2Controller::class, 'home'])->name('dashboard2.home');
 
 // Rute resource untuk brands
 Route::resource('brands', BrandController::class);
@@ -45,3 +40,8 @@ Route::resource('transaksi', TransaksiController::class); // Rute resource untuk
 
 // Rute untuk login dan user
 Route::resource('users', UserController::class);
+
+Route::resource('dashboards', DashboardController::class);
+
+Route::get('dashboard', [BrandController::class, 'dashboard']);
+
