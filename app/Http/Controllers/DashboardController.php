@@ -14,17 +14,20 @@ use Illuminate\View\View;
 //import class
 use Illuminate\Http\Request;
 
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
 class DashboardController extends Controller
 {
-    public function home(){
-		return view('home');
-	}
-
-	public function tentang(){
-		return view('tentang');
-	}
-
-	public function kontak(){
-		return view('kontak');
-	}
+	
+    /**
+     * index
+     *
+     * @return void
+     */
+    public function index()
+    {
+        return view('dashboards.index');
+    }
 }

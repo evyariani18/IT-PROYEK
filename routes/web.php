@@ -39,3 +39,6 @@ Route::resource('transaksi', TransaksiController::class); // Rute resource untuk
 // Rute untuk login dan user
 Route::resource('users', UserController::class);
 
+Route::resource('dashboards', DashboardController::class);
+
+Route::get('dashboard', [BrandController::class, 'dashboard']);

@@ -56,8 +56,8 @@ class UserController extends Controller
         // Validasi input
         $request->validate([
             'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id_user . ',id_user',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id_user . ',id_user',
             'password' => 'nullable|string|min:8', // Password opsional saat update
             'level' => 'required|integer', // Validasi level
         ]);
@@ -67,8 +67,8 @@ class UserController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
-            'level' => $request->level, // Update level
             'password' => $request->filled('password') ? bcrypt($request->password) : $user->password, // Hanya update password jika diisi
+            'level' => $request->level, // Update level
         ]);
 
         return redirect()->route('users.index')->with('success', 'Pengguna berhasil diubah.');
