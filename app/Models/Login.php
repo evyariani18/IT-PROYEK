@@ -9,6 +9,7 @@ class Login extends Model
 {
     use HasFactory;
 
+<<<<<<< HEAD
     // Nama tabel yang digunakan oleh model ini
     protected $table = 'logins';
 
@@ -36,3 +37,23 @@ class Login extends Model
     }
 }
 
+=======
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'user_id', // ID pengguna yang login
+        'login_at', // Waktu login
+    ];
+
+    /**
+     * Get the user that owns the login.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class); // Relasi dengan model User
+    }
+}
+>>>>>>> katalog
