@@ -9,51 +9,32 @@ class Login extends Model
 {
     use HasFactory;
 
-<<<<<<< HEAD
     // Nama tabel yang digunakan oleh model ini
-    protected $table = 'logins';
+    protected $table = 'login'; // Sesuai nama tabel di database
 
-    // Kolom yang bisa diisi melalui mass assignment
+    // Kolom yang dapat diisi melalui mass assignment
     protected $fillable = [
-        'username',
-        'password',
-        'last_login_at',
+        'id_user',       // ID pengguna yang login
+        'ip_address',    // Alamat IP saat login
+        'user_agent',    // Informasi perangkat/browser
+        'login_at',      // Waktu login
+        'logout_at',     // Waktu logout
     ];
 
-    // Menyembunyikan kolom tertentu dari array atau JSON
+    // Kolom yang disembunyikan saat model diubah ke array/JSON
     protected $hidden = [
-        'password',
+        'user_agent',
     ];
 
-    // Menentukan kolom dengan tipe datetime
+    // Kolom bertipe datetime
     protected $dates = [
-        'last_login_at',
+        'login_at',
+        'logout_at',
     ];
 
-    // Contoh relasi one-to-one, jika login berhubungan dengan tabel user
+    // Relasi ke tabel `users` (Many-to-One)
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_user', 'id_user');
     }
 }
-
-=======
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'user_id', // ID pengguna yang login
-        'login_at', // Waktu login
-    ];
-
-    /**
-     * Get the user that owns the login.
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class); // Relasi dengan model User
-    }
-}
->>>>>>> katalog

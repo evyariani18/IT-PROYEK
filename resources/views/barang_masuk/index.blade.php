@@ -42,6 +42,7 @@
                                     <th scope="col">HARGA TOTAL</th>
                                     <th scope="col">SUPPLIER</th>
                                     <th scope="col">TANGGAL</th>
+                                    <th scope="col">MEDIA</th>
                                     <th scope="col" style="width: 20%">AKSI</th>
                                 </tr>
                             </thead>
@@ -55,6 +56,7 @@
                                         <td>Rp {{ $item->harga_total}}</td>
                                         <td>{{ $item->supplier}}</td>
                                         <td>{{ $item->tanggal_masuk }}</td>
+                                        <td>{{ $item->media}}</td>
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('barang_masuk.destroy', $item->id_masuk) }}" method="POST">
                                                 <a href="{{ route('barang_masuk.edit', $item->id_masuk) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>EDIT</a>
@@ -65,10 +67,12 @@
                                         </td>
                                     </tr>
                                     @empty
-                                        <div class="alert alert-danger">
-                                            Data barang masuk belum tersedia.
-                                        </div>
-                                    @endforelse
+                                    <tr>
+                                        <td colspan="9" class="text-center">
+                                            <div class="alert alert-danger">Data barang masuk belum tersedia.</div>
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                         </div>

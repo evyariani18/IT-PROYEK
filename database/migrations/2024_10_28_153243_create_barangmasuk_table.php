@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('harga_total', 15, 2);
             $table->string('supplier', 50);
             $table->date('tanggal_masuk');
+            $table->string('image');
             $table->timestamps();
         });
     }

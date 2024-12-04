@@ -62,10 +62,12 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @empty
-                                <div class="alert alert-danger">
-                                    Data Kategori belum Tersedia.
-                                </div>
+                                @empty
+                                <tr>
+                                    <td colspan="8" class="text-center">
+                                        <div class="alert alert-danger">Data kategori belum tersedia.</div>
+                                    </td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>

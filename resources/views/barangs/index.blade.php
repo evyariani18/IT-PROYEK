@@ -69,11 +69,13 @@
                                                     <i class="fa fa-trash"></i> HAPUS</button>
                                             </form>
                                         </td>
-                                    </tr>
-                                @empty
-                                    <div class="alert alert-danger">
-                                        Data barang belum tersedia.
-                                    </div>
+                                        </tr>
+                                     @empty
+                                     <tr>
+                                         <td colspan="9" class="text-center">
+                                        <div class="alert alert-danger">Data Barang belum tersedia.</div>
+                                        </td>
+                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>

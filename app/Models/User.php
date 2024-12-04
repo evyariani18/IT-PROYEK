@@ -10,41 +10,32 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $table ='users';
+    // Nama tabel di database
+    protected $table = 'users';
+
+    // Primary key dan tipe data
     protected $primaryKey = 'id_user';
-    public $incrementing = false;
-    protected $keyType = 'string';  // Ini perlu ditambahkan
+    public $incrementing = false; // Primary key bukan auto increment
+    protected $keyType = 'string'; // Tipe data primary key
 
-
+    // Kolom yang dapat diisi
     protected $fillable = [
-        'id_user',
-        'name',
-        'username', // Tambahkan username ke sini
-        'email',
-        'level', // Tambahkan level ke sini
-        'password',
+        'id_user',   // ID unik pengguna
+        'name',      // Nama pengguna
+        'username',  // Username
+        'email',     // Email pengguna
+        'password',  // Password
+        'level',     // Level akses
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    // Kolom yang disembunyikan
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password',        // Sembunyikan password
+        'remember_token',  // Sembunyikan token "remember me"
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            // 'password' => 'hashed', // Jika menggunakan hashing untuk password, ini opsional
-        ];
-    }
+    // Casting tipe data kolom
+    protected $casts = [
+        'email_verified_at' => 'datetime', // Kolom waktu jika ada
+    ];
 }

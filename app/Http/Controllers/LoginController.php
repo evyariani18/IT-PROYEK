@@ -39,6 +39,6 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout(); // Mengeluarkan pengguna
-        return redirect('/'); // Redirect ke halaman utama atau halaman login
+        return redirect('/login'); // Redirect ke halaman utama atau halaman login
     }
 }

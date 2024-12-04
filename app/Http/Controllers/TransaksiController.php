@@ -121,6 +121,13 @@ class TransaksiController extends Controller
     public function destroy($id_transaksi)
     {
         $transaksi = Transaksi::findOrFail($id_transaksi);
+
+        $barang = Barang::find($transaksi->id_barang);
+        if ($barang) {
+        // Kembalikan jumlah ke stok
+        $barang->stok += $transaksi->jumlah;
+        $barang->save(); // Simpan perubahan stok
+    }
         $transaksi->delete();
 
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil dihapus.');

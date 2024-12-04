@@ -2,17 +2,24 @@
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 <style>
-    .bg-brown-custom{
+    .bg-brown-custom {
         background-color: #BC9F8B;
     }
 
     .sidebarToggle {
-        color: #543A28; /*mengubah warna ikon menjadi putih*/
+        color: #543A28; /* mengubah warna ikon menjadi putih */
     }
 
-    .avbarDropdown{
+    .avbarDropdown {
         color: #543A28;
     }
+        /* SweetAlert ukuran lebih kecil */
+    .swal2-xs {
+    max-width: 300px !important; /* Lebar lebih kecil */
+    font-size: 12px !important;  /* Ukuran font lebih kecil */
+    padding: 10px !important;    /* Padding lebih kecil */
+}
+
 </style>
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-brown-custom">
@@ -35,8 +42,39 @@
                 <li><a class="dropdown-item" href="#!">Pengaturan</a></li>
                 <li><a class="dropdown-item" href="#!">Aktivitas Log</a></li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="/Login">Logout</a></li>
+                <li><a class="dropdown-item" href="#" id="logoutButton">Logout</a></li>
             </ul>
         </li>
     </ul>
 </nav>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('logoutButton').addEventListener('click', function (e) {
+        e.preventDefault(); // Mencegah aksi default tombol
+        Swal.fire({
+            title: "Apakah Anda yakin ingin logout?",
+            text: "Anda harus login kembali untuk mengakses sistem!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, Logout",
+            cancelButtonText: "Batal",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Tampilkan notifikasi logout berhasil
+                Swal.fire({
+                    title: "Berhasil Logout!",
+                    text: "Anda telah keluar dari sistem.",
+                    icon: "success",
+                    timer: 2000, // Notifikasi otomatis hilang setelah 2 detik
+                    showConfirmButton: false,
+                }).then(() => {
+                    // Redirect ke halaman login atau logout setelah notifikasi selesai
+                    window.location.href = "/login"; // Sesuaikan dengan rute logout Anda
+                });
+            }
+        });
+    });
+</script>

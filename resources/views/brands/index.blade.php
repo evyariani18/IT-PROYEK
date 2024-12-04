@@ -66,11 +66,13 @@
                                     </form>
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="3" class="text-center text-muted">Data merek belum tersedia.</td>
-                            </tr>
-                        @endforelse
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center">
+                                        <div class="alert alert-danger">Data merek belum tersedia.</div>
+                                    </td>
+                                </tr>
+                            @endforelse
                     </tbody>
                 </table>    
                 {{ $brands->links() }}

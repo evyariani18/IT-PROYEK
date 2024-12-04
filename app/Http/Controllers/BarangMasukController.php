@@ -56,6 +56,7 @@ class BarangMasukController extends Controller
             'harga_total' => 'required|numeric|min:0', // Harga 
             'supplier' => 'nullable|string|max:50', // supplier 
             'tanggal_masuk' => 'required|date',
+            'image'
         ]);
 
 

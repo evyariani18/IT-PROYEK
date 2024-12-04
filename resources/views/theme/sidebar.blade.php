@@ -61,6 +61,14 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-money-check-dollar"></i></div>
                     Transaksi
                 </a>
+                <a class="nav-link" href="/laporan">
+                    <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
+                    Laporan
+                </a>
+                <a class="nav-link" href="/stock">
+                    <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
+                    Prioritas Stok
+                </a>
             </div>
         </div>
         <div class="sb-sidenav-footer">
