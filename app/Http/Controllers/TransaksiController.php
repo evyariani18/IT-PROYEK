@@ -20,9 +20,9 @@ class TransaksiController extends Controller
     public function create()
     {
         // Ambil semua data barang
-        $barangs = Barang::all(); 
+        $barang = Barang::all(); 
 
-        return view('transaksi.create', compact('barangs')); // Kirim data barang ke view
+        return view('transaksi.create', compact('barang')); // Kirim data barang ke view
     }
 
     // Menyimpan transaksi baru
@@ -30,7 +30,7 @@ class TransaksiController extends Controller
     {
         // Validasi input
         $request->validate([
-            'id_barang' => 'required|exists:barangs,id_barang',// Memastikan id_barang ada di tabel barang
+            'id_barang' => 'required|exists:barang,id_barang',// Memastikan id_barang ada di tabel barang
             'jumlah' => 'required|integer|min:1',
             'harga_satuan' => 'required|numeric|min:0',
             'harga_total' => 'required|numeric|min:0',
@@ -58,9 +58,9 @@ class TransaksiController extends Controller
                 'keterangan' => $request->keterangan,
             ]);
 
-            $barangs = Barang::find($request->id_barang);
-            $barangs->stok -= $request->jumlah;
-            $barangs->save(); // Simpan perubahan status
+            $barang = Barang::find($request->id_barang);
+            $barang->stok -= $request->jumlah;
+            $barang->save(); // Simpan perubahan status
 
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil ditambahkan.');
     }
@@ -70,8 +70,8 @@ class TransaksiController extends Controller
     public function edit($id_transaksi)
     {
         $transaksi = Transaksi::findOrFail( $id_transaksi);
-        $barangs = Barang::all();
-        return view('transaksi.edit', compact('transaksi', 'barangs'));
+        $barang = Barang::all();
+        return view('transaksi.edit', compact('transaksi', 'barang'));
     }
 
     // Memperbarui transaksi
@@ -91,17 +91,17 @@ class TransaksiController extends Controller
         $harga_total = $request->jumlah * $request->harga_satuan;
 
         // Ambil data barang terkait transaksi yang akan diupdate
-        $barangs = Barang::find($request->id_barang);
+        $barang = Barang::find($request->id_barang);
         
         // Hitung selisih jumlah
         $selisih = $transaksi->jumlah - $request->jumlah;
     
         // Jika jumlah yang diupdate lebih kecil, tambahkan stok yang dikurangi
         if ($selisih > 0) {
-            $barangs->stok += $selisih;
+            $barang->stok += $selisih;
         } else {
             // Jika jumlah yang diupdate lebih besar, kurangi stok barang
-            $barangs->stok -= ($request->jumlah - $transaksi->jumlah);
+            $barang->stok -= ($request->jumlah - $transaksi->jumlah);
         }
         $transaksi->update([
             'id_barang' => $request->id_barang,
@@ -112,7 +112,7 @@ class TransaksiController extends Controller
             'keterangan' => $request->keterangan,
         ]);
 
-            $barangs->save(); // Simpan perubahan status
+            $barang->save(); // Simpan perubahan status
 
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil diperbarui.');
     }

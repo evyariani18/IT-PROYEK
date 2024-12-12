@@ -97,6 +97,7 @@
                         @enderror
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Login</button>
+                    <p style="text-align:center;">Belum memiliki akun? <a href="/register">Daftar</a></p>
                 </form>
             </div>
         </div>

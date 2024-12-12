@@ -6,7 +6,7 @@
 
 <style>
     .card{
-        margin: 30px;
+        margin: 10px;
     }
 
     .thead-style {
@@ -30,12 +30,13 @@
             </div>
             <div class="card border-10 shadow-sm rounded">
                 <div class="card-body">
-                    <a href="{{ route('barangs.create') }}" class="btn btn-md btn-success mb-3"><i class="fa fa-plus"></i> TAMBAH</a>
+                    <a href="{{ route('barang.create') }}" class="btn btn-md btn-success mb-3"><i class="fa fa-plus"></i> TAMBAH</a>
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered table-striped shadow-sm" style="background-color: #f8f9fa;">
                             <thead class="thead-style">
                                 <tr class="text-center">
                                     <th scope="col">NO</th>
+                                    <th scope="col">KODE</th>
                                     <th scope="col">NAMA</th>
                                     <th scope="col">STOK</th>
                                     <th scope="col">HARGA</th>
@@ -47,9 +48,10 @@
                                 </tr>
                             </thead>
                             <tbody class="tbody-style">
-                                @forelse ($barangs as $index => $item)
+                                @forelse ($barang as $index => $item)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
+                                        <td>{{ $item->kode_barang}}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->stok }}</td>
                                         <td>Rp {{ $item->harga}}</td>
@@ -60,8 +62,8 @@
                                         <td>{{ $item->brand->title }}</td> <!-- anggap setiap item memiliki relasi 'brand' -->
                                         <td>{{ $item->category->name }}</td> <!-- anggap setiap item memiliki relasi 'category' -->
                                         <td class="text-center">
-                                            <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('barangs.destroy', $item->id_barang) }}" method="POST">
-                                                <a href="{{ route('barangs.edit', $item->id_barang) }}" class="btn btn-sm btn-primary">
+                                            <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('barang.destroy', $item->id_barang) }}" method="POST">
+                                                <a href="{{ route('barang.edit', $item->id_barang) }}" class="btn btn-sm btn-primary">
                                                     <i class="fa fa-edit"></i> EDIT</a>
                                                 @csrf
                                                 @method('DELETE')
@@ -72,7 +74,7 @@
                                         </tr>
                                      @empty
                                      <tr>
-                                         <td colspan="9" class="text-center">
+                                         <td colspan="10" class="text-center">
                                         <div class="alert alert-danger">Data Barang belum tersedia.</div>
                                         </td>
                                      </tr>
@@ -80,7 +82,7 @@
                             </tbody>
                         </table>
                     </div>
-                    {{ $barangs->links() }}
+                    {{ $barang->links() }}
                 </div>
             </div>
         </div>

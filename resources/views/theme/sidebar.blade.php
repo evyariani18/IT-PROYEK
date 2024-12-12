@@ -49,31 +49,60 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-layer-group"></i></div>
                     Kategori
                 </a>
-                <a class="nav-link" href="/barangs">
+                <a class="nav-link" href="/barang">
                     <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
                     Barang
                 </a>
-                <a class="nav-link" href="/barang_masuk">
-                    <div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>
-                    Barang Masuk
-                </a>
-                <a class="nav-link" href="/transaksi">
+        
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTransaksi" aria-expanded="false" aria-controls="collapseTransaksi">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-money-check-dollar"></i></div>
                     Transaksi
                 </a>
-                <a class="nav-link" href="/laporan">
+                <div class="collapse" id="collapseTransaksi" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="/pembelian">
+                            <div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>
+                            Pembelian
+                        </a>
+                        <a class="nav-link" href="/penjualan">
+                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                            Penjualan
+                        </a>
+                    </nav>
+                </div>
+
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLaporan" aria-expanded="false" aria-controls="collapseLaporan">
                     <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
                     Laporan
                 </a>
+                <div class="collapse" id="collapseLaporan" aria-labelledby="headingLaporan" data-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="/laporan_pembelian">
+                            <div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>
+                            Pembelian
+                        </a>
+                        <a class="nav-link" href="/laporan_penjualan">
+                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                            Penjualan
+                        </a>
+                    </nav>
+                </div>
+
                 <a class="nav-link" href="/stock">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
                     Prioritas Stok
                 </a>
             </div>
         </div>
-        <div class="sb-sidenav-footer">
-            <div class="small">Masuk sebagai: </div>
-            Admin Toko Shadad
-        </div>
+            <div class="sb-sidenav-footer">
+            @if (Auth::check())
+                <div class="small">Masuk sebagai: </div>
+                {{ Auth::user()->name }}
+            </div>
+            @else
+            <div class="sb-sidenav-footer">
+                <div class="small">Anda belum login</div>
+            </div>
+            @endif
     </nav>
 </div>

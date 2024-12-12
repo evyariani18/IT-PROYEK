@@ -5,19 +5,23 @@
 @section('content')
 
 <style>
-    .card{
-        margin: 30px;
+    .form-label {
+        font-weight: bold;
     }
 
-    .card-body{
-        background-color: ;#E7E8D8
+    .form-control {
+        border-radius: 8px;
     }
+
 </style>
+
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="text-center">Tambah Pengguna Baru</h3>
-            <div class="card border-10 shadow-sm rounded mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-10 shadow-sm rounded">
+                <div class="card-header text-center">
+                    <h3>Tambah Pembelian</h3>
+                </div>
                 <div class="card-body">
                     <a href="{{ route('users.index') }}" class="btn btn-secondary">KEMBALI</a>
                     <form action="{{ route('users.store') }}" method="POST">

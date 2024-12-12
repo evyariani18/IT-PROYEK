@@ -6,7 +6,7 @@
 
 <style>
     .card{
-        margin: 30px;
+        margin: 10px;
     }
 
     .thead-style {
@@ -21,7 +21,7 @@
 
 </style>
 <div class="container mt-5">
-    <h3 class="text-center my-4">Data Transaksi</h3>
+    <h3 class="text-center my-4">Data Penjualan Barang</h3>
 
     <div class="card border-10 shadow-sm rounded">
         <div class="card-body">
@@ -31,6 +31,7 @@
                     <thead class="thead-style">
                         <tr class="text-center">
                             <th>NO</th>
+                            <th>KODE</th>
                             <th>NAMA BARANG</th>
                             <th>JUMLAH</th>
                             <th>HARGA SATUAN</th>
@@ -44,6 +45,7 @@
                         @forelse ($transaksi as $index => $item)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
+                                <td>{{ $item->barang->kode_barang}}</td>
                                 <td>{{ $item->barang->name}}</td>
                                 <td>{{ $item->jumlah }}</td>
                                 <td>{{ number_format($item->harga_satuan, 2) }}</td>
@@ -61,7 +63,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="text-center">
+                                <td colspan="9" class="text-center">
                                     <div class="alert alert-danger">Data Transaksi belum tersedia.</div>
                                 </td>
                             </tr>

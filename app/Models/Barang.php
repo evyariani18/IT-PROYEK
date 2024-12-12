@@ -9,13 +9,14 @@ class Barang extends Model
 {
     use HasFactory;
 
-    protected $table = 'barangs'; // Nama tabel di database
+    protected $table = 'barang'; // Nama tabel di database
     protected $primaryKey = 'id_barang'; // Primary key
     public $incrementing = false; // Jika primary key tidak auto increment
     protected $keyType = 'string'; // Jenis data primary key (jika 'string', jika tidak bisa dihilangkan)
 
     protected $fillable = [
         'id_barang', 
+        'kode_barang',
         'name', 
         'stok', 
         'harga', 

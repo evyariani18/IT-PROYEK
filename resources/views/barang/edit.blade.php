@@ -8,10 +8,6 @@
      .card{
         margin: 30px;
     }
-
-    .card-body{
-        background-color: #E7E8D8;
-    }
 </style>
 
 <div class="container mt-5">
@@ -21,14 +17,22 @@
             <hr>
             <div class="card border-10 shadow-sm rounded">
                 <div class="card-body">
-                <a href="{{ route('barangs.index') }}" class="btn btn-md btn-secondary mb-3">KEMBALI</a>
-                    <form action="{{ route('barangs.update', $barangs->id_barang) }}" method="POST" enctype="multipart/form-data">
+                <a href="{{ route('barang.index') }}" class="btn btn-md btn-secondary mb-3">KEMBALI</a>
+                    <form action="{{ route('barang.update', $barang->id_barang) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')  <!-- Gunakan metode PUT untuk update -->
 
                         <div class="mb-3">
+                            <label for="kode_barang" class="form-label">Kode</label>
+                            <input type="text" class="form-control" id="kode_barang" name="kode_barang" value="{{ old('kode_barang', $barang->kode_barang) }}" required>
+                            @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
                             <label for="name" class="form-label">Nama Barang</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $barangs->name) }}" required>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $barang->name) }}" required>
                             @error('name')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -36,7 +40,7 @@
 
                         <div class="form-group mb-3">
                             <label for="stok">Stok</label>
-                            <input type="number" name="stok" class="form-control" value="{{ old('stok', $barangs->stok) }}" required>
+                            <input type="number" name="stok" class="form-control" value="{{ old('stok', $barang->stok) }}" required>
                             @error('stok')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -44,7 +48,7 @@
 
                         <div class="form-group mb-3">
                             <label for="harga">Harga</label>
-                            <input type="number" name="harga" step="0.01" class="form-control" value="{{ old('harga', $barangs->harga) }}" required min="0">
+                            <input type="number" name="harga" step="0.01" class="form-control" value="{{ old('harga', $barang->harga) }}" required min="0">
                             @error('harga')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -52,7 +56,7 @@
 
                         <div class="form-group mb-3">
                             <label for="deskripsi">Deskripsi</label>
-                            <textarea name="deskripsi" class="form-control" rows="3" required>{{ old('deskripsi', $barangs->deskripsi) }}</textarea>
+                            <textarea name="deskripsi" class="form-control" rows="3" required>{{ old('deskripsi', $barang->deskripsi) }}</textarea>
                         </div>
 
                         <div class="form-group mb-3">
@@ -69,7 +73,7 @@
                             <select name="id_merek" class="form-control" required>
                                 <option value="">Pilih Merek</option>
                                 @foreach($brands as $brand)
-                                    <option value="{{ $brand->id_merek }}" {{ $barangs->id_merek == $brand->id_merek ? 'selected' : '' }}>{{ $brand->title }}</option>
+                                    <option value="{{ $brand->id_merek }}" {{ $barang->id_merek == $brand->id_merek ? 'selected' : '' }}>{{ $brand->title }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -79,7 +83,7 @@
                             <select name="id_kategori" class="form-control" required>
                                 <option value="">Pilih Kategori</option>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id_kategori }}" {{ $barangs->id_kategori == $category->id_kategori ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    <option value="{{ $category->id_kategori }}" {{ $barang->id_kategori == $category->id_kategori ? 'selected' : '' }}>{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -13,17 +13,11 @@ use App\Http\Controllers\TransaksiController; // Import TransaksiController
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController; // Import LoginController
 use App\Http\Controllers\Dashboard2Controller; // Import Dashboard2Controller untuk dashboard tambahan
-
-// Rute halaman utama
-Route::get('/', function () {
-    return view('tambah_barang');
-});
-
-// Rute untuk melihat barang
-Route::get('/lihat-barang', function () {
-    return view('tambah_barang'); // Sesuaikan jika diperlukan view yang berbeda
-});
-
+use App\Http\Controllers\PembelianController;
+use App\Http\Controllers\DetailPembelianController;
+use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\LaporanPembelianController;
+use App\Http\Controllers\LaporanPenjualanController;
 
 // Rute resource untuk brands
 Route::resource('brands', BrandController::class);
@@ -32,7 +26,7 @@ Route::resource('brands', BrandController::class);
 Route::resource('categories', CategoryController::class);
 
 // Rute resource untuk barangs
-Route::resource('barangs', BarangController::class);
+Route::resource('barang', BarangController::class);
 
 // Rute resource untuk barang masuk
 Route::resource('barang_masuk', BarangMasukController::class);
@@ -42,6 +36,15 @@ Route::resource('transaksi', TransaksiController::class); // Rute resource untuk
 
 // Rute untuk login dan user
 Route::resource('users', UserController::class);
+
+//Rute untuk pembelian
+Route::resource('pembelian', PembelianController::class);
+
+Route::resource('penjualan', PenjualanController::class);
+
+Route::resource('laporan_pembelian', LaporanPembelianController::class);
+
+Route::resource('laporan_penjualan', LaporanPenjualanController::class);
 
 // Route untuk menampilkan form login (GET)
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login.form');
@@ -82,5 +85,13 @@ Route::get('/alamat', [KatalogController::class, 'alamat'])->name('alamat');
 Route::get('/kontak', [KatalogController::class, 'kontak'])->name('kontak');
 
 Route::get('barang_masuk/create', [BarangMasukController::class, 'create'])->name('barang_masuk.create');
+
+Route::middleware(['level:1'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
+
+Route::middleware(['level:2'])->group(function () {
+    Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+});
 
 

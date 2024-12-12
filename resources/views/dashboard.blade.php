@@ -67,40 +67,73 @@
             <div class="card bg-danger text-white mb-4">
                 <div class="card-body"><i class="fas fa-box"></i> Barang</div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="/barangs">Lihat Detail</a>
+                    <a class="small text-white stretched-link" href="/barang">Lihat Detail</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>
         </div>
+        
         <div class="col-xl-3 col-md-6">
-            <div class="card bg-purple-custom text-white mb-4">
-                <div class="card-body"><i class="fas fa-truck"></i> Barang Masuk</div>
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body"><i class="fa-solid fa-money-check-dollar"></i> Transaksi</div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="/barang_masuk">Lihat Detail</a>
+                    <!-- Trigger Modal Button -->
+                    <a class="small text-white stretched-link" data-toggle="modal" data-target="#pilihanModal">Lihat Detail</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>
         </div>
 
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-success text-white mb-4">
-                <div class="card-body"><i class="fa-solid fa-money-check-dollar"></i> Transaksi</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="/transaksi">Lihat Detail</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+        <!-- Modal Popup -->
+        <div class="modal fade" id="pilihanModal" tabindex="-1" aria-labelledby="pilihanModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pilihanModalLabel">Pilih Jenis Transaksi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Options for Pembelian and Penjualan -->
+                        <a href="{{ route('pembelian.index') }}" class="btn btn-info btn-block mb-2">Transaksi Pembelian</a>
+                        <a href="{{ route('penjualan.index') }}" class="btn btn-warning btn-block">Transaksi Penjualan</a>
+                    </div>
                 </div>
             </div>
         </div>
+
 
         <div class="col-xl-3 col-md-6">
             <div class="card bg-blue-custom text-white mb-4">
                 <div class="card-body"><i class="fas fa-file-alt"></i> Laporan</div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="/laporan">Lihat Detail</a>
+                    <!-- Tombol untuk membuka modal -->
+                    <a class="small text-white stretched-link" data-toggle="modal" data-target="#laporanModal">Lihat Detail</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>
         </div>
+
+        <!-- Modal Pilihan Laporan -->
+        <div class="modal fade" id="laporanModal" tabindex="-1" aria-labelledby="laporanModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="laporanModalLabel">Pilih Jenis Laporan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Opsi untuk Laporan Pembelian dan Penjualan -->
+                        <a href="{{ route('laporan_pembelian.index') }}" class="btn btn-info btn-block mb-2">Laporan Pembelian</a>
+                        <a href="{{ route('laporan_penjualan.index') }}" class="btn btn-warning btn-block">Laporan Penjualan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="col-xl-3 col-md-6">
             <div class="card bg-green-custom text-white mb-4">
@@ -118,7 +151,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-chart-area me-1"></i>
-                    Transaksi Pada Setiap Bulan
+                    Penjualan Pada Setiap Bulan
                 </div>
                 <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
             </div>
@@ -127,7 +160,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-chart-bar me-1"></i>
-                    Transaksi Perbulan
+                    Penjualan Perbulan
                 </div>
                 <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
             </div>

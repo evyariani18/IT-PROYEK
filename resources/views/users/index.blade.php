@@ -6,7 +6,7 @@
 
 <style>
     .card{
-        margin: 30px;
+        margin: 10px;
     }
 
     .card-body{

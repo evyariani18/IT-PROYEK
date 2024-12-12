@@ -4,43 +4,43 @@
 
 @section('content')
 
+
 <style>
-    .card {
-        margin: 30px;
+    .form-label {
+        font-weight: bold;
     }
- 
-    .card-body{
-        background-color: #E7E8D8;
+
+    .form-control {
+        border-radius: 8px;
     }
+
 </style>
 
 <div class="container mt-5">
-    <h3 class="text-center my-4">Tambah Transaksi</h3>
-
-    @if (session('success'))
-        <div class="alert alert-success">
-            <span class="me-2">&#10003;</span> {{ session('success') }}
-        </div>
-    @elseif (session('error'))
-        <div class="alert alert-danger">
-            <span class="me-2">&#10060;</span> {{ session('error') }}
-        </div>
-    @endif
-
-    <div class="card border-0 shadow-sm rounded">
-        <div class="card-body">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-10 shadow-sm rounded">
+                <div class="card-header text-center">
+                    <h3>Tambah Penjualan</h3>
+                </div>
+                <div class="card-body">
             <a href="{{ route('transaksi.index') }}" class="btn btn-secondary">KEMBALI</a>
             <form action="{{ route('transaksi.store') }}" method="POST">
                 @csrf
 
                 <div class="mb-3">
-                    <label for="id_barang" class="form-label">Nama Barang</label>
+                    <label for="id_barang" class="form-label">Kode Barang</label>
                     <select name="id_barang" id="id_barang" class="form-control" required>
                         <option value="">Pilih Barang</option>
-                        @foreach($barangs as $barang)
-                            <option value="{{ $barang->id_barang }}" data-harga="{{ $barang->harga }}">{{ $barang->name }}</option>
+                        @foreach($barang as $item)
+                            <option value="{{ $item->id_barang }}" data-name="{{ $item->name}}" data-harga="{{ $item->harga }}">{{ $item->kode_barang }}</option>
                         @endforeach
                     </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nama Barang</label>
+                    <input type="text" name="name" id="name" class="form-control" readonly>
                 </div>
 
                 <div class="mb-3">
@@ -80,17 +80,29 @@
     const hargaSatuanInput = document.getElementById('harga_satuan');
     const hargaTotalInput = document.getElementById('harga_total');
     const jumlahInput = document.getElementById('jumlah');
+    const nameInput = document.getElementById('name');
 
     // Event listener untuk ketika barang dipilih
     idBarangSelect.addEventListener('change', function() {
-        const selectedOptions = Array.from(this.selectedOptions);
-        const totalHargaSatuan = selectedOptions.reduce((total, option) => {
-            return total + parseFloat(option.getAttribute('data-harga')) || 0;
-        }, 0);
+        const selectedOption = this.options[this.selectedIndex];
+        
+        if (selectedOption.value) {
+            // Mengambil data name dan harga dari opsi yang dipilih
+            const namaBarang = selectedOption.getAttribute('data-name');
+            const hargaSatuan = parseFloat(selectedOption.getAttribute('data-harga')) || 0;
+            
+            // Mengisi field nama barang dan harga satuan
+            nameInput.value = namaBarang;
+            hargaSatuanInput.value = hargaSatuan;
 
-        // Mengisi harga satuan sebagai total harga satuan untuk barang yang dipilih
-        hargaSatuanInput.value = totalHargaSatuan;
-        calculateTotal(); // Menghitung total ketika harga satuan diisi
+            // Menghitung total harga jika jumlah sudah ada
+            calculateTotal();
+        } else {
+            // Jika tidak ada barang yang dipilih, kosongkan input
+            nameInput.value = '';
+            hargaSatuanInput.value = '';
+            hargaTotalInput.value = '';
+        }
     });
 
     // Fungsi untuk menghitung total harga

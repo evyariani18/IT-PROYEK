@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('barangmasuk', function (Blueprint $table) {
             $table->string('id_masuk')->primary();
             $table->string('id_barang');
-            $table->foreign('id_barang')->references('id_barang')->on('barangs')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_barang')->references('id_barang')->on('barang')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('jumlah');
             $table->decimal('harga_satuan', 15, 2);
             $table->decimal('harga_total', 15, 2);

@@ -9,12 +9,9 @@
         margin: 30px;
     }
 
-    .card-body{
-        background-color: #E7E8D8;
-    }
 </style>
 <div class="container mt-5">
-    <h3 class="text-center my-4">Edit Data Barang</h3>
+    <h3 class="text-center my-4">Edit Data Pembelian Barang</h3>
     <div class="row">
         <div class="col-md-12">
             

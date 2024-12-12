@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('barangs', function (Blueprint $table) {
+        Schema::create('barang', function (Blueprint $table) {
             $table->string('id_barang')->primary();
+            $table->string('kode_barang');
             $table->string('name');
             $table->integer('stok');
             $table->decimal('harga', 15, 2);
-            $table->string('deskripsi', 255);
+            $table->string('deskripsi', 255)->nullable();
             $table->string('image');
             $table->string('id_merek');
             $table->foreign('id_merek')->references('id_merek')->on('brands')->onUpdate('cascade')->onDelete('cascade');

@@ -8,10 +8,6 @@
     .card{
         margin: 30px;
     }
-
-    .card-body{
-        background-color: #E7E8D8;
-    }
 </style>
 <div class="row">
     <div class="col-md-12">

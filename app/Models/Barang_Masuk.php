@@ -22,6 +22,7 @@ class Barang_Masuk extends Model
         'harga_total', 
         'supplier', 
         'tanggal_masuk',
+        'image',
     ];
 
      // Definisi relasi ke model Barang

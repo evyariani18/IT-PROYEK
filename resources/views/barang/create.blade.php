@@ -8,42 +8,37 @@
     .card{
         margin: 30px;
     }
-
-    .thead-style {
-        background-color: #BC9F8B;
-        color: white;
-        text-align: center;
+</style>
+<style>
+    .form-label {
+        font-weight: bold;
     }
 
-    .tbody-style {
-        background-color: #E7E8D8;
-    }
-
-    .card-body{
-        background-color: #E7E8D8;
+    .form-control {
+        border-radius: 8px;
     }
 
 </style>
 
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="text-center my-4">Tambah Barang Baru</h3>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            <hr>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
             <div class="card border-10 shadow-sm rounded">
+                <div class="card-header text-center">
+                    <h3>Tambah Merek</h3>
+                </div>
                 <div class="card-body">
-                    <form action="{{ route('barangs.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('barang.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <a href="{{ route('barangs.index') }}" class="btn btn-md btn-secondary mb-3">KEMBALI</a>
+                        <a href="{{ route('barang.index') }}" class="btn btn-md btn-secondary mb-3">KEMBALI</a>
+                        <div class="mb-3">
+                            <label for="kode_barang" class="form-label">Kode</label>
+                            <input type="text" class="form-control" id="kode_barang" name="kode_barang" required>
+                            @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama Barang</label>
                             <input type="text" class="form-control" id="name" name="name" required>
@@ -88,15 +83,7 @@
                                 @foreach($brands as $brand)
                                     <option value="{{ $brand->id_merek }}">{{ $brand->title }}</option>
                                 @endforeach
-                                <option value="tambah_baru">Tambah Merek</option>
                             </select>
-                        </div>
-
-                        <div id="formTambahMerek" style="display: none;">
-                            <div class="form-group mb-3">
-                                <label for="nama_merek_baru">Merek Baru</label>
-                                <input type="text" name="nama_merek_baru" class="form-control">
-                            </div>
                         </div>
 
                         <div class="form-group mb-3">
@@ -106,15 +93,7 @@
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id_kategori }}">{{ $category->name }}</option>
                                 @endforeach
-                                <option value="tambah_baru">Tambah Kategori</option>
                             </select>
-                        </div>
-
-                        <div id="formTambahKategori" style="display: none;">
-                            <div class="form-group mb-3">
-                                <label for="nama_kategori_baru">Kategori Baru</label>
-                                <input type="text" name="nama_kategori_baru" class="form-control">
-                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-md btn-success">SIMPAN</button>

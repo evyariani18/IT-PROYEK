@@ -8,14 +8,10 @@
     .card{
         margin: 30px;
     }
-
-    .card-body{
-        background-color: #E7E8D8;
-    }
 </style>
 
 <div class="container mt-5">
-    <h3 class="text-center my-4">Edit Transaksi</h3>
+    <h3 class="text-center my-4">Edit Data Penjualan Barang</h3>
 
 @if (session('success'))
     <div class="alert alert-success">

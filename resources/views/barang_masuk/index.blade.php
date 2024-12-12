@@ -6,7 +6,7 @@
 
 <style>
     .card{
-            margin: 30px;
+            margin: 10px;
         }
 
     .thead-style {
@@ -21,11 +21,11 @@
 
 </style>
 
-    <div class="container mt-5">
+    <div class="container mt-5 custom">
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <h3 class="text-center my-4"> Data Barang Masuk</h3>
+                    <h3 class="text-center my-4"> Data Pembelian Barang</h3>
                     <hr>
                 </div>
                 <div class="card border-10 shadow-sm rounded">
@@ -36,6 +36,7 @@
                             <thead class="thead-style">
                                 <tr class="text-center">
                                     <th scope="col">NO</th>
+                                    <th scope="col">KODE</th>
                                     <th scope="col">NAMA BARANG</th>
                                     <th scope="col">JUMLAH</th>
                                     <th scope="col">HARGA SATUAN</th>
@@ -49,14 +50,18 @@
                             <tbody class="tbody-style">
                                 @forelse ($barangmasuk as $index => $item)
                                     <tr>
-                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ ($barangmasuk->currentPage() - 1) * $barangmasuk->perPage() + $loop->iteration }}</td>
+                                        <td>{{ $item->barang->kode_barang }}</td>
                                         <td>{{ $item->barang->name }}</td>
                                         <td>{{ $item->jumlah }}</td>
                                         <td>Rp {{ $item->harga_satuan}}</td>
                                         <td>Rp {{ $item->harga_total}}</td>
                                         <td>{{ $item->supplier}}</td>
                                         <td>{{ $item->tanggal_masuk }}</td>
-                                        <td>{{ $item->media}}</td>
+                                        <td>
+                                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" style="width: 50px; height: 50px;">
+                                            </td>
+                                        </td>
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('barang_masuk.destroy', $item->id_masuk) }}" method="POST">
                                                 <a href="{{ route('barang_masuk.edit', $item->id_masuk) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>EDIT</a>
@@ -68,7 +73,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="9" class="text-center">
+                                        <td colspan="10" class="text-center">
                                             <div class="alert alert-danger">Data barang masuk belum tersedia.</div>
                                         </td>
                                     </tr>

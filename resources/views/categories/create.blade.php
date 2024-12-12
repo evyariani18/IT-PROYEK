@@ -4,21 +4,26 @@
 
 @section('content')
 
+
 <style>
-    .card{
-        margin: 30px;
+    .form-label {
+        font-weight: bold;
     }
 
-    .card-body{
-        background-color: #E7E8D8;
+    .form-control {
+        border-radius: 8px;
     }
+
 </style>
-<div class="row">
-    <div class="col-md-12">
-        <h3 class="text-center my-4">Tambah Kategori Baru</h3>
-        <hr>
-        <div class="card border-10 shadow-sm rounded">
-            <div class="card-body">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-10 shadow-sm rounded">
+                <div class="card-header text-center">
+                    <h3>Tambah Kategori</h3>
+                </div>
+                <div class="card-body">
                 <a href="{{ route('categories.index') }}" class="btn btn-md btn-secondary mb-3">KEMBALI</a>
                 <form action="{{ route('categories.store') }}" method="POST">
                     @csrf

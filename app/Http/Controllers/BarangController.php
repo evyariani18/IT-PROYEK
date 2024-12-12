@@ -30,10 +30,10 @@ class BarangController extends Controller
     public function index() : View
     {
         //get all products
-        $barangs = Barang::with('brand', 'category')->paginate(10);
+        $barang = Barang::with('brand', 'category')->paginate(10);
         
         //render view with products
-        return view('barangs.index', compact('barangs'));
+        return view('barang.index', compact('barang'));
     }
 
 
@@ -44,13 +44,14 @@ class BarangController extends Controller
         $categories = Category::all();
 
         //mengembalikan 
-        return view('barangs.create', compact('brands','categories'));
+        return view('barang.create', compact('brands','categories'));
     }
     
     public function store(Request $request)
     {
         //Fungsi validasi
         $request->validate([
+            'kode_barang' => 'required|unique:barang',
             'name' => 'required|string|max:255',
             'stok' => 'required|integer|min:1', // Pastikan stok adalah angka dan minimal 1
             'harga' => 'required|numeric|min:0', // Harga 
@@ -59,49 +60,6 @@ class BarangController extends Controller
             'id_merek' => 'required|exists:brands,id_merek', // Validasi merek harus ada di tabel brands
             'id_kategori' => 'required|exists:categories,id_kategori', // Validasi kategori harus ada di tabel categories
         ]);
-
-        $id_merek = $request->input('id_merek');
-
-        if ($request->id_merek === 'tambah_baru') {
-            // Mendapatkan ID merek terakhir dan menambahkannya
-            $lastMerek = Brand::orderBy('id_merek', 'desc')->first();
-            $newIdMerek = $lastMerek ? 'M' . str_pad((intval(substr($lastMerek->id_merek, 1)) + 1), 3, '0', STR_PAD_LEFT) : 'M001';
-    
-            // Simpan merek baru di tabel `brands`
-            $newMerek = Brand::create([
-                'id_merek' => $newIdMerek,
-                'title' => $request->nama_merek_baru
-            ]);
-    
-            // Set $id_merek ke id merek baru yang telah dibuat
-            $id_merek = $newMerek->id_merek;
-        } else {
-            // Jika tidak menambah baru, gunakan id_merek yang dipilih dari input
-            $id_merek = $request->id_merek;
-        }
-
-        $id_kategori = $request->input('id_kategori');
-
-        if ($request->id_kategori === 'tambah_baru') {
-            // Mendapatkan ID kategori terakhir dan menambahkannya
-            $lastKategori = Category::orderBy('id_kategori', 'desc')->first();
-            $newIdKategori = $lastKategori ? 'K' . str_pad((intval(substr($lastKategori->id_kategori, 1)) + 1), 3, '0', STR_PAD_LEFT) : 'K001';
-    
-            // Simpan merek baru di tabel `categories`
-            $newKategori = Category::create([
-                'id_kategori' => $newIdKategori,
-                'name' => $request->nama_kategori_baru
-            ]);
-    
-            // Set $id_kategori ke id kategori baru yang telah dibuat
-            $id_kategori = $newKategori->id_kategori;
-        } else {
-            // Jika tidak menambah baru, gunakan id_merek yang dipilih dari input
-            $id_kategori = $request->id_kategori;
-        }
-
-         // Log data yang diterima dari permintaan
-            \Log::info($request->all());
     
         // Mendapatkan ID Barang terakhir dan menambahkannya dengan 1
         $lastBarang = Barang::orderBy('id_barang', 'desc')->first();
@@ -110,46 +68,48 @@ class BarangController extends Controller
         // Menyimpan data ke database
         Barang::create([
             'id_barang' => $newIdBarang,
+            'kode_barang' => $request->kode_barang,
             'name' => $request->name,
             'stok' => $request->stok,
             'harga' => $request->harga,
             'deskripsi' => $request->deskripsi,
             'image' => $request->file('image') ? $request->file('image')->store('images', 'public') : null, // Menyimpan gambar jika ada
-            'id_merek' => $id_merek,
-            'id_kategori' => $id_kategori,
+            'id_merek' => $request->id_merek,
+            'id_kategori' => $request->id_kategori,
             ]);
     
-        return redirect()->route('barangs.index')->with('success', 'Barang berhasil ditambahkan');
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan');
 
 
     } 
 
     public function destroy($id_barang)
     {
-        $barangs = Barang::findOrFail($id_barang);
+        $barang = Barang::findOrFail($id_barang);
     
         // Hapus gambar dari penyimpanan jika ada
-        if ($barangs->image && \Storage::disk('public')->exists($barangs->image)) {
-            \Storage::disk('public')->delete($barangs->image);
+        if ($barang->image && \Storage::disk('public')->exists($barang->image)) {
+            \Storage::disk('public')->delete($barang->image);
         }
     
         // Hapus data barang dari database
-        $barangs->delete();
+        $barang->delete();
     
-        return redirect()->route('barangs.index')->with('success', 'Barang berhasil dihapus');
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus');
     }
     
     public function edit($id_barang) {
-    $barangs = Barang::findOrFail($id_barang);//Mengambil data barang
+    $barang = Barang::findOrFail($id_barang);//Mengambil data barang
     $brands = Brand::all(); // Mengambil semua data merek
     $categories = Category::all(); // Mengambil semua data kategori
 
-    return view('barangs.edit', compact('barangs', 'brands', 'categories'));
+    return view('barang.edit', compact('barang', 'brands', 'categories'));
     }
 
     public function update(Request $request, $id_barang)
     {
         $request->validate([
+            'kode_barang' => 'required|string',
             'name' => 'required|string|max:255',
             'stok' => 'required|integer',
             'harga' => 'required|numeric',
@@ -159,22 +119,23 @@ class BarangController extends Controller
             'id_kategori' => 'required|exists:categories,id_kategori',
         ]);
 
-            $barangs = Barang::findOrFail($id_barang);
+            $barang = Barang::findOrFail($id_barang);
 
             // Cek dan perbarui gambar jika ada upload baru
             if ($request->hasFile('image')) {
                 // Hapus gambar lama jika ada
-                if ($barangs->image && \Storage::disk('public')->exists($barangs->image)) {
-                    \Storage::disk('public')->delete($barangs->image);
+                if ($barang->image && \Storage::disk('public')->exists($barang->image)) {
+                    \Storage::disk('public')->delete($barang->image);
                 }
                 
                 // Simpan gambar baru
                 $imagePath = $request->file('image')->store('images', 'public');
-                $barangs->image = $imagePath;
+                $barang->image = $imagePath;
             }
 
             // Update data barang
-            $barangs->update([
+            $barang->update([
+                'kode_barang' => $request->kode_barang,
                 'name' => $request->name,
                 'stok' => $request->stok,
                 'harga' => $request->harga,
@@ -183,6 +144,6 @@ class BarangController extends Controller
                 'id_kategori' => $request->id_kategori,
             ]);
 
-            return redirect()->route('barangs.index')->with('success', 'Barang berhasil diupdate');
+            return redirect()->route('barang.index')->with('success', 'Barang berhasil diupdate');
         }
     }
