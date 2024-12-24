@@ -95,9 +95,9 @@
             </div>
         </div>
             <div class="sb-sidenav-footer">
-            @if (Auth::check())
+            @if (Auth::guard('web')->check())
                 <div class="small">Masuk sebagai: </div>
-                {{ Auth::user()->name }}
+                {{ Auth::guard('web')->user()->name }}
             </div>
             @else
             <div class="sb-sidenav-footer">

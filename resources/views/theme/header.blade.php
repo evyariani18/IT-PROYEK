@@ -31,7 +31,7 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-brown-custom">
     <!-- Navbar Brand-->
     <a class="navbar-brand ps-3" href="/dashboard">
-        <img src="{{ asset('storage/images/logo2.png') }}" alt="Logo Toko Shadad" style="width: 130px; height: auto;">
+        <img src="{{ asset('storage/images/logo1.png') }}" alt="Logo Toko Shadad" style="width: 130px; height: auto;">
     </a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars custom"></i></button>

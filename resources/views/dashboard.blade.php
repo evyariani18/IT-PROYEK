@@ -31,7 +31,16 @@
 </style>
 
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Dashboard Admin Toko Shadad</h1>
+
+            @if(Auth::check() && Auth::user()->level == 1)
+                <li><a href="{{ route('dashboard.admin') }}">Admin Dashboard</a></li>
+            @endif
+
+            @if(Auth::check() && Auth::user()->level == 2)
+                <li><a href="{{ route('dashboard.karyawan') }}">Karyawan Dashboard</a></li>
+            @endif
+
+    <h1 class="mt-4">Dashboard Toko Shadad</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active" style="text-align: center; width: 100%;">Selamat Datang di Halaman Dashboard Toko Shadad</li>
     </ol>

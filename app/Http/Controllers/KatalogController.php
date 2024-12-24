@@ -109,4 +109,29 @@ class KatalogController extends Controller
 
         return redirect()->route('katalog.index')->with('success', 'Produk berhasil dihapus');
     }
+
+    public function tentang()
+    {
+    // Jika halaman alamat hanya membutuhkan view tanpa data tambahan
+    return view('katalog.tentang'); // Pastikan ada file view 'alamat.blade.php' di dalam folder resources/views
+    }
+    
+    public function produk()
+    {
+    // Jika halaman alamat hanya membutuhkan view tanpa data tambahan
+    return view('katalog.produk'); // Pastikan ada file view 'alamat.blade.php' di dalam folder resources/views
+    }
+
+    // Method untuk menampilkan halaman alamat
+    public function alamat()
+    {
+    // Jika halaman alamat hanya membutuhkan view tanpa data tambahan
+    return view('katalog.alamat'); // Pastikan ada file view 'alamat.blade.php' di dalam folder resources/views
+    }
+
+    public function kontak()
+    {
+    // Jika halaman alamat hanya membutuhkan view tanpa data tambahan
+    return view('katalog.kontak'); // Pastikan ada file view 'kontak.blade.php' di dalam folder resources/views
+    }
 }

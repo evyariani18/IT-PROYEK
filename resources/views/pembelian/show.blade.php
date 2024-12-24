@@ -40,7 +40,10 @@
                 </div>
                 <div class="card-body">
                     <a href="{{ route('pembelian.index') }}" class="btn btn-secondary mb-3">Kembali</a>
-
+                    <br>
+                    <a href="{{ route('pembelian.cetak_pembelian') }}" class="btn btn-danger">
+                      <i class="fas fa-file-pdf"></i> Export ke PDF</a>
+                    <br>
                     <!-- Tampilkan informasi Penjualan -->
                     <div class="mb-3">
                         <label for="tanggal_pembelian" class="form-label">Tanggal Pembelian</label>

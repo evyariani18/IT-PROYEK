@@ -18,72 +18,102 @@
     .tbody-style {
         background-color: #E7E8D8;
     }
+
+    .header-section {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .header-section img {
+        max-width: 100px;
+    }
+
+    .header-details {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+
+    .signature-box {
+        text-align: center;
+        width: 200px;
+    }
+
+    .signature-line {
+        margin-top: 50px;
+        border-top: 1px solid black;
+        margin-bottom: 5px;
+    }
+
+    .signature-label {
+        margin-top: 5px;
+    }
 </style>
 
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12">
-            <div>
-                <h3 class="text-center my-4">Laporan Penjualan</h3>
-                <hr>
+            <!-- Header Section -->
+            <div class="header-section">
+                <img src="{{ asset('storage/images/logo.png') }}" alt="Logo Toko Shadad" style="width: 130px; height: auto;">
+                <h3>Perlengkapan Rumah Toko Shadad</h3>
+                <p>Jl. Datu Daim Pasar Tapandang Berseri I Blok G No 02 Tanah Laut Kalimantan Selatan</p>
             </div>
+
+            <!-- Export Button -->
+            <div class="mb-4">
+
+            <!-- Tabel Penjualan -->
             <div class="card border-10 shadow-sm rounded">
                 <div class="card-body">
-                    <a href="{{ route('laporan_penjualan.index') }}" class="btn btn-md btn-success mb-3"><i class="fa fa-download"></i> EXPORT</a>
+                <a href="{{ route('laporan_penjualan.penjualan_pdf') }}" class="btn btn-danger">
+                    <i class="fas fa-file-pdf"></i> Export ke PDF</a>
+                    <br>
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered table-striped shadow-sm" style="background-color: #f8f9fa;">
                             <thead class="thead-style">
                                 <tr class="text-center">
                                     <th scope="col">NO</th>
                                     <th scope="col">KODE TRANSAKSI</th>
-                                    <th scope="col">TANGGAL PENJUALAN</th>
-                                    <th scope="col">KETERANGAN</th>
-                                    <th scope="col">TOTAL HARGA</th>
-                                    <th scope="col">DETAIL PENJUALAN</th>
+                                    <th scope="col">TANGGAL</th>
+                                    <th scope="col">KODE BARANG</th>
+                                    <th scope="col">NAMA BARANG</th>
+                                    <th scope="col">QTY</th>
+                                    <th scope="col">HARGA SATUAN</th>
+                                    <th scope="col">TOTAL</th>
                                 </tr>
                             </thead>
                             <tbody class="tbody-style">
+                                @php $grandTotal = 0; @endphp
                                 @forelse ($penjualan as $index => $item)
-                                    <tr>
-                                        <td>{{ ($penjualan->currentPage() - 1) * $penjualan->perPage() + $loop->iteration }}</td>
-                                        <td>{{ $item->id_penjualan }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($item->tanggal_penjualan)->format('d-m-Y') }}</td>
-                                        <td>{{ $item->keterangan}}</td>
-                                        <td>Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td>
-                                        <td>
-                                            <table class="table table-bordered table-sm">
-                                                <thead style="text-align: center;">
-                                                    <tr>
-                                                        <th>Nama Barang</th>
-                                                        <th>Jumlah</th>
-                                                        <th>Harga Satuan</th>
-                                                        <th>Subtotal</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach($item->details as $detail)
-                                                        <tr>
-                                                            <td>{{ $detail->barang->name }}</td>
-                                                            <td>{{ $detail->jumlah }}</td>
-                                                            <td>Rp {{ number_format($detail->harga_satuan, 0, ',', '.') }}</td>
-                                                            <td>Rp {{ number_format($detail->sub_total, 0, ',', '.') }}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
+                                    @foreach ($item->details as $detail)
+                                        @php $subtotal = $detail->jumlah * $detail->harga_satuan; @endphp
+                                        @php $grandTotal += $subtotal; @endphp
+                                        <tr>
+                                            <td>{{ $index + 1}}</td>
+                                            <td>{{ $detail->id_penjualan }}</td>
+                                            <td>{{ now()->format('d-m-Y') }}</td>
+                                            <td>{{ $detail->barang->kode_barang }}</td>
+                                            <td>{{ $detail->barang->name }}</td>
+                                            <td>{{ $detail->jumlah }}</td>
+                                            <td>Rp {{ number_format($detail->harga_satuan, 0, ',', '.') }}</td>
+                                            <td>Rp {{ number_format($subtotal, 0, ',', '.') }}</td>
+                                        </tr>
+                                    @endforeach
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center">
-                                            <div class="alert alert-danger">Data pembelian belum tersedia.</div>
+                                        <td colspan="6" class="text-center">
+                                            <div class="alert alert-danger">Data penjualan belum tersedia.</div>
                                         </td>
                                     </tr>
                                 @endforelse
+                                <tr>
+                                    <td colspan="7" class="text-right"><strong>Total:</strong></td>
+                                    <td><strong>Rp {{ number_format($grandTotal, 0, ',', '.') }}</strong></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
-                    {{ $penjualan->links() }}
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>lighten</title>
+      <title>Katalog Toko Shadad</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -150,45 +150,53 @@
     </div>
 </div>
 
+
 <div class="choose_bg">
     <div class="container">
         <div class="white_bg">
             <div class="row">
                 <!-- Produk Pilihan 1 -->
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="for_box">
-                        <i><img src="icon/1.png"/></i>
-                        <h3>Perlengkapan Dapur</h3>
-                        <p>Temukan alat-alat dapur berkualitas untuk membantu Anda memasak dengan mudah dan praktis.</p>
+                    <div class="product-box" style="border: 1px solid #ddd; padding: 20px; text-align: center; background-color: #fff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; height: 350px; justify-content: space-between;">
+                        <i><img src="icon/dapur.jpeg" alt="Perlengkapan Dapur" style="width: 100%; height: auto; max-height: 200px;" /></i>
+                        <h3 style="font-size: 18px; margin-top: 10px; color: #333; margin-bottom: 10px;">Perlengkapan Dapur</h3>
+                        <p style="font-size: 14px; color: #666; flex-grow: 1; margin-bottom: 0;">Temukan alat-alat dapur berkualitas untuk membantu Anda memasak dengan mudah dan praktis.</p>
                     </div>
                 </div>
 
                 <!-- Produk Pilihan 2 -->
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="for_box">
-                        <i><img src="icon/2.png"/></i>
-                        <h3>Perabotan Rumah</h3>
-                        <p>Perabotan rumah yang nyaman dan modern untuk memperindah setiap sudut rumah Anda.</p>
+                    <div class="product-box" style="border: 1px solid #ddd; padding: 20px; text-align: center; background-color: #fff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; height: 350px; justify-content: space-between;">
+                        <i><img src="icon/perabotan.jpeg" alt="Perabotan Rumah" style="width: 100%; height: auto; max-height: 200px;" /></i>
+                        <h3 style="font-size: 18px; margin-top: 10px; color: #333; margin-bottom: 10px;">Perabotan Rumah</h3>
+                        <p style="font-size: 14px; color: #666; flex-grow: 1; margin-bottom: 0;">Perabotan rumah yang nyaman dan modern untuk memperindah setiap sudut rumah Anda.</p>
                     </div>
                 </div>
 
                 <!-- Produk Pilihan 3 -->
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="for_box">
-                        <i><img src="icon/3.png"/></i>
-                        <h3>Dekorasi Rumah</h3>
-                        <p>Berbagai dekorasi rumah untuk menciptakan suasana yang menyenangkan di rumah Anda.</p>
+                    <div class="product-box" style="border: 1px solid #ddd; padding: 20px; text-align: center; background-color: #fff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; height: 350px; justify-content: space-between;">
+                        <i><img src="icon/dekorasi.jpg" alt="Dekorasi Rumah" style="width: 100%; height: auto; max-height: 200px;" /></i>
+                        <h3 style="font-size: 18px; margin-top: 10px; color: #333; margin-bottom: 10px;">Dekorasi Rumah</h3>
+                        <p style="font-size: 14px; color: #666; flex-grow: 1; margin-bottom: 0;">Berbagai dekorasi rumah untuk menciptakan suasana yang menyenangkan di rumah Anda.</p>
                     </div>
                 </div>
 
                 <!-- Produk Pilihan 4 -->
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="for_box">
-                        <i><img src="icon/4.png"/></i>
-                        <h3>Perlengkapan Tidur</h3>
-                        <p>Kenyamanan tidur Anda penting, temukan kasur dan perlengkapan tidur terbaik di sini.</p>
+                    <div class="product-box" style="border: 1px solid #ddd; padding: 20px; text-align: center; background-color: #fff; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; height: 350px; justify-content: space-between;">
+                        <i><img src="icon/kamar.jpeg" alt="Perlengkapan Tidur" style="width: 100%; height: auto; max-height: 200px;" /></i>
+                        <h3 style="font-size: 18px; margin-top: 10px; color: #333; margin-bottom: 10px;">Perlengkapan Tidur</h3>
+                        <p style="font-size: 14px; color: #666; flex-grow: 1; margin-bottom: 0;">Kenyamanan tidur Anda penting, temukan kasur dan perlengkapan tidur terbaik di sini.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
                 <!-- Tombol Aksi -->
                 <div class="col-md-12">
@@ -222,16 +230,16 @@
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                     <div class="service-box">
                         <i><img src="icon/brand1.png" alt="Brand 1" /></i>
-                        <h3>Merek A</h3>
-                        <p>Produk berkualitas dari Merek A, untuk keperluan rumah Anda.</p>
+                        <h3>Merek Hiu</h3>
+                        <p>Produk berkualitas dari Merek Hiu, untuk keperluan rumah Anda.</p>
                     </div>
                 </div>
                 <!-- Merek 2 -->
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                     <div class="service-box">
                         <i><img src="icon/brand2.png" alt="Brand 2" /></i>
-                        <h3>Merek B</h3>
-                        <p>Perlengkapan rumah dari Merek B dengan harga terjangkau.</p>
+                        <h3>Merek Belimbing</h3>
+                        <p>Perlengkapan rumah dari Merek Belimbing dengan harga terjangkau.</p>
                     </div>
                 </div>
                 <!-- Merek 3 -->
@@ -453,96 +461,96 @@
             <!-- Produk 1 -->
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                <div class="product-box">
-                  <i><img src="icon/p1.png"/></i>
-                  <h3>Set Sofa Premium</h3>
-                  <span>Rp 14.999.000</span>
+                  <i><img src="icon/terpal.jpg"/></i>
+                  <h3>Terpal</h3>
+                  <span>Rp 100.000</span>
                </div>
             </div>
             <!-- Produk 2 -->
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                <div class="product-box">
-                  <i><img src="icon/p2.png"/></i>
-                  <h3>Meja Makan Mewah</h3>
-                  <span>Rp 11.999.000</span>
+                  <i><img src="icon/gorden.jpeg"/></i>
+                  <h3>Gorden</h3>
+                  <span>Rp 210.000</span>
                </div>
             </div>
             <!-- Produk 3 -->
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                <div class="product-box">
-                  <i><img src="icon/p3.png"/></i>
-                  <h3>Kasur Nyaman</h3>
+                  <i><img src="icon/kasur.jpeg"/></i>
+                  <h3>Kasur</h3>
                   <span>Rp 8.999.000</span>
                </div>
             </div>
             <!-- Produk 4 -->
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                <div class="product-box">
-                  <i><img src="icon/p4.png"/></i>
-                  <h3>Mesin Pembuat Kopi Pintar</h3>
+                  <i><img src="icon/tikar.jpeg"/></i>
+                  <h3>Tikar Plastik</h3>
                   <span>Rp 2.199.000</span>
                </div>
             </div>
             <!-- Produk 5 -->
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                <div class="product-box">
-                  <i><img src="icon/p5.png"/></i>
-                  <h3>Lampu Gantung Modern</h3>
+                  <i><img src="icon/ambal.jpg"/></i>
+                  <h3>Ambal</h3>
                   <span>Rp 1.299.000</span>
                </div>
             </div>
             <!-- Produk 6 -->
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                <div class="product-box">
-                  <i><img src="icon/p6.png"/></i>
-                  <h3>TV Smart LED 50"</h3>
+                  <i><img src="icon/ambalmalay.jpeg"/></i>
+                  <h3>Ambal Malaysia</h3>
                   <span>Rp 7.499.000</span>
                </div>
             </div>
             <!-- Produk 7 -->
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                <div class="product-box">
-                  <i><img src="icon/p7.png"/></i>
-                  <h3>Vase Kristal</h3>
+                  <i><img src="icon/tikartenun.jpg"/></i>
+                  <h3>Tikar Tenun</h3>
                   <span>Rp 899.000</span>
                </div>
             </div>
             <!-- Produk 8 -->
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                <div class="product-box">
-                  <i><img src="icon/p8.png"/></i>
-                  <h3>Rak Buku Minimalis</h3>
+                  <i><img src="icon/sapu.jpg"/></i>
+                  <h3>Sapu</h3>
                   <span>Rp 2.599.000</span>
                </div>
             </div>
             <!-- Produk 9 -->
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                <div class="product-box">
-                  <i><img src="icon/p9.png"/></i>
-                  <h3>Meja Kopi Kayu</h3>
+                  <i><img src="icon/kasurkarakter.jpg"/></i>
+                  <h3>Kasur Karakter</h3>
                   <span>Rp 1.899.000</span>
                </div>
             </div>
             <!-- Produk 10 -->
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                <div class="product-box">
-                  <i><img src="icon/p10.png"/></i>
-                  <h3>Peralatan Dapur Set</h3>
+                  <i><img src="icon/karpet.jpg"/></i>
+                  <h3>Karpet Bulu</h3>
                   <span>Rp 899.000</span>
                </div>
             </div>
             <!-- Produk 11 -->
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                <div class="product-box">
-                  <i><img src="icon/p11.png"/></i>
-                  <h3>Standing Fan Digital</h3>
+                  <i><img src="icon/kasurkapuk.jpg"/></i>
+                  <h3>Kasur Kapuk</h3>
                   <span>Rp 1.499.000</span>
                </div>
             </div>
             <!-- Produk 12 -->
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                <div class="product-box">
-                  <i><img src="icon/p12.png"/></i>
-                  <h3>Blender Multifungsi</h3>
+                  <i><img src="icon/tikarkarakter.jpeg"/></i>
+                  <h3>Tikar Karakter</h3>
                   <span>Rp 699.000</span>
                </div>
             </div>

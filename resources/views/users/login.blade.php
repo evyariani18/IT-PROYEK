@@ -96,7 +96,13 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                    <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
+                    <div>
+                        <a href="auth/redirect" class="btn w-100 d-flex align-items-center justify-content-center text-black border border-primary text-decoration-none" style="background-color: white;">
+                            <img src="https://w7.pngwing.com/pngs/344/344/png-transparent-google-logo-google-logo-g-suite-google-text-logo-symbol-thumbnail.png" alt="Google Logo" width="20" height="20" class="me-2">
+                            Login with Google
+                        </a>
+                    </div>
                     <p style="text-align:center;">Belum memiliki akun? <a href="/register">Daftar</a></p>
                 </form>
             </div>

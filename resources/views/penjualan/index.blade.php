@@ -70,7 +70,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6" class="text-center">
+                                        <td colspan="8" class="text-center">
                                             <div class="alert alert-danger">Data penjualan belum tersedia.</div>
                                         </td>
                                     </tr>

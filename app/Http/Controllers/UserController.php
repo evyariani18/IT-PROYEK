@@ -156,4 +156,12 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success', 'Pengguna berhasil dihapus.');
     }
+
+    public function adminDahsboard(){
+        return view('dashboard.admin');
+    }
+
+    public function karyawanDashboard(){
+        return view('dashboard.karyawan');
+    }
 }

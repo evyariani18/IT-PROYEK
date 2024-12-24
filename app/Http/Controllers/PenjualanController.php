@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Barang; // import class
 use App\Models\Penjualan;
 use App\Models\Detail_Penjualan;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
+use PDF;
 
 class PenjualanController extends Controller
 {
@@ -167,6 +169,11 @@ class PenjualanController extends Controller
     
         return redirect()->route('penjualan.index')->with('success', 'Data penjualan berhasil dihapus.');
     }
-    
+    public function cetak_pdf()
+    {
+        $penjualan = Penjualan::with('details')->get();
+        $pdf = PDF::loadview('penjualan.cetak_penjualan', ['penjualan' => $penjualan]);
+        return $pdf->download('cetak_penjualan-pdf');
     }
+}
         

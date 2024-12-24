@@ -23,10 +23,13 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'id_user',   // ID unik pengguna
         'name',      // Nama pengguna
-        'username',  // Username
         'email',     // Email pengguna
+        'username',  // Username
         'password',  // Password
         'level',     // Level akses
+        'google_id',
+        'google_token',
+        'google_refresh_token',
     ];
 
     // Kolom yang disembunyikan
