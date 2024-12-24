@@ -40,22 +40,25 @@ Route::resource('users', UserController::class);
 //Rute untuk pembelian
 Route::resource('pembelian', PembelianController::class);
 
+//Route untuk penjualan
 Route::resource('penjualan', PenjualanController::class);
 
+//Route untuk laporan pembelian
 Route::resource('laporan_pembelian', LaporanPembelianController::class);
 
+//Route untuk laporan penjualan
 Route::resource('laporan_penjualan', LaporanPenjualanController::class);
 
-// Route untuk menampilkan form login (GET)
+//Route untuk menampilkan form login (GET)
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login.form');
 
-// Route untuk memproses login (POST)
+//Route untuk memproses login (POST)
 Route::post('/login', [UserController::class, 'login'])->name('login');
 
-// Route untuk menampilkan form registrasi
+//Route untuk menampilkan form registrasi
 Route::get('/register', [UserController::class, 'showRegisterForm'])->name('register.form');
 
-// Route untuk memproses registrasi
+//Route untuk memproses registrasi
 Route::post('/register', [UserController::class, 'register'])->name('register');
 
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
