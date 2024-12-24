@@ -25,7 +25,7 @@
         <div class="col-md-8">
             <div class="card border-10 shadow-sm rounded">
                 <div class="card-header text-center">
-                    <h3>Tambah Merek</h3>
+                    <h3>Tambah Data Barang</h3>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('barang.store') }}" method="POST" enctype="multipart/form-data">

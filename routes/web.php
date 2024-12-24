@@ -18,6 +18,7 @@ use App\Http\Controllers\DetailPembelianController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\LaporanPembelianController;
 use App\Http\Controllers\LaporanPenjualanController;
+use App\Http\Controllers\Auth\SocialiteController;
 
 // Rute resource untuk brands
 Route::resource('brands', BrandController::class);
@@ -43,11 +44,17 @@ Route::resource('pembelian', PembelianController::class);
 //Route untuk penjualan
 Route::resource('penjualan', PenjualanController::class);
 
-//Route untuk laporan pembelian
-Route::resource('laporan_pembelian', LaporanPembelianController::class);
+Route::resource('laporan_pembelian', LaporanPembelianController::class)->except(['show']);
+Route::get('/laporan_pembelian/cetak_pdf', [LaporanPembelianController::class, 'cetak_pdf'])->name('laporan_pembelian.pembelian_pdf');
 
-//Route untuk laporan penjualan
-Route::resource('laporan_penjualan', LaporanPenjualanController::class);
+Route::resource('laporan_penjualan', LaporanPenjualanController::class)->except(['show']);
+Route::get('/laporan_penjualan/cetak_pdf', [LaporanPenjualanController::class, 'cetak_pdf'])->name('laporan_penjualan.penjualan_pdf');
+
+Route::resource('pembelian', PembelianController::class)->except(['show']);
+Route::get('/cetak_pembelian/cetak_pdf', [PembelianController::class, 'cetak_pdf'])->name('pembelian.cetak_pembelian');
+
+Route::resource('penjualan', PenjualanController::class)->except(['show']);
+Route::get('/cetak_penjualan/cetak_pdf', [PenjualanController::class, 'cetak_pdf'])->name('penjualan.cetak_penjualan');
 
 //Route untuk menampilkan form login (GET)
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login.form');
@@ -89,12 +96,16 @@ Route::get('/kontak', [KatalogController::class, 'kontak'])->name('kontak');
 
 Route::get('barang_masuk/create', [BarangMasukController::class, 'create'])->name('barang_masuk.create');
 
-Route::middleware(['level:1'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::middleware(['auth', 'check.level:1'])->group(function () {
+    Route::get('/admin', [UserController::class, 'adminDashboard'])->name('dashboard.admin');
 });
 
-Route::middleware(['level:2'])->group(function () {
-    Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+Route::middleware(['auth', 'check.level:2'])->group(function () {
+    Route::get('/karyawan', [UserController::class, 'karyawanDashboard'])->name('dashboard.karyawan');
 });
+
+Route::get('/auth/redirect', [SocialiteController::class, 'redirect']); 
+Route::get('/auth/google/callback', [SocialiteController::class, 'callback']);
+
 
 

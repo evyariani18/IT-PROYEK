@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Pembelian; // import model
 use App\Models\Barang; // import barang model
 use App\Models\Detail_Pembelian; // import detail pembelian model
+use PDF;
 
 class PembelianController extends Controller
 {
@@ -189,5 +190,11 @@ class PembelianController extends Controller
         $pembelian->delete();
 
         return redirect()->route('pembelian.index')->with('success', 'Pembelian berhasil dihapus.');
+    }
+    public function cetak_pdf()
+    {
+        $pembelian = Pembelian::with('details')->get();
+        $pdf = PDF::loadview('pembelian.cetak_pembelian', ['pembelian' => $pembelian]);
+        return $pdf->download('cetak_pembelian-pdf');
     }
 }

@@ -78,7 +78,7 @@
                               <li><a href="/katalog">Beranda</a> </li>
                               <li><a href="{{ route('tentang') }}">Tentang</a> </li>
                               <li><a href="{{ route('produk') }}">Produk</a></li>
-                              <li class="active"><a href="{{ route('alamat') }}">Alamat</a></li>
+                              <li class="active"><a href="/alamat">Alamat</a> </li>
                               <li><a href="{{ route('kontak') }}">Kontak</a></li>
                                                              
                            </ul>
