@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminateh\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -62,23 +62,27 @@ class UserController extends Controller
     // Proses login pengguna
     public function login(Request $request)
     {
-        // Validasi input login
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'string'],
+         // Validasi input
+         $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
-        // Cek kredensial
-        if (Auth::attempt($credentials)) {
-            // Login berhasil, redirect ke halaman utama atau halaman yang sebelumnya diakses
-            return redirect()->intended('/dashboard'); // Mengarahkan ke dashboard setelah login
+        // Autentikasi pengguna
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+
+            if ($user->isAdmin()) {
+                return redirect()->route('dashboard');
+            } elseif ($user->isKaryawan()) {
+                return redirect()->route('dashboard2');
+            }
         }
-
-        // Jika gagal login, kembali ke halaman login dengan pesan error
-        return back()->withErrors([
+        // Jika gagal, kembalikan ke form login dengan pesan error
+        return redirect()->back()->withErrors([
             'email' => 'Email atau password salah.',
-        ]);
-    }
+        ])->withInput($request->only('email'));
+    }        
 
     // Logout pengguna
     public function logout()
@@ -86,9 +90,14 @@ class UserController extends Controller
         // Melakukan logout
         Auth::logout();
         
-        // Redirect ke halaman login
+        // Menghancurkan sesi pengguna
+        session()->invalidate();
+        session()->regenerateToken();
+        
+        // Redirect ke halaman login dengan pesan sukses
         return redirect()->route('login')->with('success', 'Anda telah logout.');
     }
+    
 
     // Menampilkan form tambah pengguna (admin)
     public function create()
@@ -133,18 +142,16 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username,' . $user->id_user . ',id_user',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id_user . ',id_user',
             'password' => 'nullable|string|min:8',
-            'level' => 'required|in:1,2,3',
+            'role' => 'required|in:admin,karyawan',
         ]);
 
         $user->update([
             'name' => $request->name,
-            'username' => $request->username,
             'email' => $request->email,
             'password' => $request->filled('password') ? bcrypt($request->password) : $user->password,
-            'level' => $request->level,
+            'role' => $request->role,
         ]);
 
         return redirect()->route('users.index')->with('success', 'Pengguna berhasil diubah.');
@@ -156,12 +163,5 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success', 'Pengguna berhasil dihapus.');
     }
-
-    public function adminDahsboard(){
-        return view('dashboard.admin');
-    }
-
-    public function karyawanDashboard(){
-        return view('dashboard.karyawan');
-    }
+    
 }

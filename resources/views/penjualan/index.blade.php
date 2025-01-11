@@ -18,6 +18,13 @@
     .tbody-style {
         background-color: #E7E8D8;
     }
+
+    .filter-form {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
 </style>
 
 <div class="container mt-5">
@@ -29,9 +36,28 @@
             </div>
             <div class="card border-10 shadow-sm rounded">
                 <div class="card-body">
-                    <a href="{{ route('penjualan.create') }}" class="btn btn-md btn-success mb-3">
-                        <i class="fa fa-plus"></i> TAMBAH
-                    </a>
+                <div class="mb-4 d-flex justify-content-between align-items-center">
+                        <!-- Add Button (Left) -->
+                        <div>
+                            <a href="{{ route('penjualan.create') }}" class="btn btn-success">
+                                <i class="fa fa-plus"></i> TAMBAH
+                            </a>
+                        </div>
+
+                        <!-- Filter Form (Right) -->
+                        <div class="d-flex justify-content-end">
+                            <form action="{{ route('penjualan.index') }}" method="GET" class="filter-form">
+                                <div class="mr-2">
+                                    <input type="date" name="start_date" id="start_date" class="form-control" value="{{ request('start_date') }}">
+                                </div>
+                                <div class="mr-2">
+                                    <input type="date" name="end_date" id="end_date" class="form-control" value="{{ request('end_date') }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                            </form>
+                        </div>
+                    </div>
+
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered table-striped shadow-sm" style="background-color: #f8f9fa;">
                             <thead class="thead-style">

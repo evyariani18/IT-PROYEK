@@ -31,20 +31,12 @@
 </style>
 
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Dashboard Admin Toko Shadad</h1>
+
+    <h1 class="mt-4">Dashboard Karyawan Toko Shadad</h1>
     <ol class="breadcrumb mb-4">
-        @if(Auth::check())<li class="breadcrumb-item active" style="text-align: center; width: 100%;">Selamat Datang {{ Auth::user()->name }} di Halaman Dashboard Toko Shadad</li> @endif
+        <li class="breadcrumb-item active" style="text-align: center; width: 100%;">Selamat Datang {{ Auth::user()->name }} di Halaman Dashboard Toko Shadad</li>
     </ol>
     <div class="row">
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-primary text-white mb-4">
-                <div class="card-body"><i class="fas fa-user"></i> Pengguna</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="/users">Lihat Detail</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-        </div>
         <div class="col-xl-3 col-md-6">
             <div class="card bg-yellow-custom text-white mb-4">
                 <div class="card-body"><i class="fa-solid fa-tag"></i> Merek</div>
@@ -102,47 +94,6 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-blue-custom text-white mb-4">
-                <div class="card-body"><i class="fas fa-file-alt"></i> Laporan</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <!-- Tombol untuk membuka modal -->
-                    <a class="small text-white stretched-link" data-toggle="modal" data-target="#laporanModal">Lihat Detail</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Pilihan Laporan -->
-        <div class="modal fade" id="laporanModal" tabindex="-1" aria-labelledby="laporanModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="laporanModalLabel">Pilih Jenis Laporan</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Opsi untuk Laporan Pembelian dan Penjualan -->
-                        <a href="{{ route('laporan_pembelian.index') }}" class="btn btn-info btn-block mb-2">Laporan Pembelian</a>
-                        <a href="{{ route('laporan_penjualan.index') }}" class="btn btn-warning btn-block">Laporan Penjualan</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-green-custom text-white mb-4">
-                <div class="card-body"><i class="fas fa-chart-line"></i> Prioritas Stok</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="/prioritas_stok">Lihat Detail</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-        </div>
     </div>
+    
 @endsection

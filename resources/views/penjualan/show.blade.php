@@ -41,7 +41,7 @@
                 <div class="card-body">
                     <a href="{{ route('penjualan.index') }}" class="btn btn-secondary mb-3">Kembali</a>
                     <br>
-                    <a href="{{ route('penjualan.cetak_penjualan') }}" class="btn btn-danger">
+                    <a class="btn btn-sm btn-danger" href="{{ route('penjualan.cetak_penjualan', ['id_penjualan' => $penjualan->id_penjualan]) }}">
                       <i class="fas fa-file-pdf"></i> Export ke PDF</a>
                     <br>
                     <!-- Tampilkan informasi Penjualan -->

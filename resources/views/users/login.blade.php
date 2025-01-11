@@ -103,7 +103,7 @@
                             Login with Google
                         </a>
                     </div>
-                    <p style="text-align:center;">Belum memiliki akun? <a href="/register">Daftar</a></p>
+                    <p style="text-align:center; margin-top: 10px;">Belum memiliki akun? <a href="/register">Daftar</a></p>
                 </form>
             </div>
         </div>

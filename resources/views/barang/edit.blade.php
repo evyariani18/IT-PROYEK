@@ -56,7 +56,7 @@
 
                         <div class="form-group mb-3">
                             <label for="deskripsi">Deskripsi</label>
-                            <textarea name="deskripsi" class="form-control" rows="3" required>{{ old('deskripsi', $barang->deskripsi) }}</textarea>
+                            <textarea name="deskripsi" class="form-control" rows="3">{{ old('deskripsi', $barang->deskripsi) }}</textarea>
                         </div>
 
                         <div class="form-group mb-3">

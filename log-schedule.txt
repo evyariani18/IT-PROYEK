@@ -1,0 +1,4 @@
+
+  2025-01-03 04:15:41 Running ["artisan" cek:stok] .............................................................. 1s DONE
+  ⇂ "C:\xampp\php\php.exe" "artisan" cek:stok > "NUL" 2>&1  
+

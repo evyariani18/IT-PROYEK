@@ -32,15 +32,18 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">Core</div>
-                <a class="nav-link" href="/dashboard">
+                <a class="nav-link" 
+                href="{{ auth()->user()->role == 'admin' ? '/dashboard' : '/dashboard2' }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Dashboard
                 </a>
                 <div class="sb-sidenav-menu-heading">Interface</div>
+                @if(auth()->user()->role == 'admin')
                 <a class="nav-link" href="/users">
                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                     Pengguna
                 </a>
+                @endif
                 <a class="nav-link" href="/brands">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-tag"></i></div>
                     Merek
@@ -70,7 +73,7 @@
                         </a>
                     </nav>
                 </div>
-
+                @if(auth()->user()->role == 'admin')
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLaporan" aria-expanded="false" aria-controls="collapseLaporan">
                     <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
                     Laporan
@@ -88,21 +91,53 @@
                     </nav>
                 </div>
 
-                <a class="nav-link" href="/stock">
+                <a class="nav-link" href="/prioritas_stok">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
                     Prioritas Stok
                 </a>
-            </div>
+                @endif
+                <div class="sb-sidenav-footer">
+                    @if (Auth::check())
+                        <div class="small">Masuk sebagai:</div>
+                        {{ Auth::user()->name }}
+                    @else
+                        <div class="small">Anda belum login</div>
+                    @endif
+                </div>
+
+            </nav>
         </div>
-            <div class="sb-sidenav-footer">
-            @if (Auth::guard('web')->check())
-                <div class="small">Masuk sebagai: </div>
-                {{ Auth::guard('web')->user()->name }}
-            </div>
-            @else
-            <div class="sb-sidenav-footer">
-                <div class="small">Anda belum login</div>
-            </div>
-            @endif
-    </nav>
-</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Pastikan SweetAlert di-load -->
+<script>
+    document.getElementById('logoutButton').addEventListener('click', function (e) {
+        e.preventDefault(); // Mencegah navigasi default
+        Swal.fire({
+            title: "Apakah Anda yakin ingin logout?",
+            text: "Anda harus login kembali untuk mengakses sistem!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, Logout",
+            cancelButtonText: "Batal",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Berhasil Logout!",
+                    text: "Anda telah keluar dari sistem.",
+                    icon: "success",
+                    timer: 2000,
+                    showConfirmButton: false,
+                }).then(() => {
+                    // Redirect ke halaman logout atau login
+                    window.location.href = "/logout"; // Sesuaikan dengan rute logout Anda
+                });
+            }
+        });
+    });
+</script>
+
+
+
+

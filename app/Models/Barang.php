@@ -37,4 +37,15 @@ class Barang extends Model
     {
         return $this->belongsTo(Category::class, 'id_kategori', 'id_kategori');
     }
+
+    public function detail_pembelian()
+    {
+        return $this->hasMany(Detail_Pembelian::class, 'id_barang');
+    }
+
+    // Definisikan relasi dengan Detail_Penjualan
+    public function detail_penjualan()
+    {
+        return $this->hasMany(Detail_Penjualan::class, 'id_barang');
+    }
 }

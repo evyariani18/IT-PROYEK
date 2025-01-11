@@ -51,7 +51,7 @@
                                 <div class="mr-2">
                                     <input type="date" name="end_date" id="end_date" class="form-control" value="{{ request('end_date') }}">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Tampilkan</button>
+                                <button type="submit" class="btn btn-primary">Filter</button>
                             </form>
                         </div>
                     </div>
@@ -91,15 +91,15 @@
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin?');" action="{{ route('pembelian.destroy', $item->id_pembelian) }}" method="POST">
                                                 <a href="{{ route('pembelian.show', $item->id_pembelian) }}" class="btn btn-sm btn-success">
-                                                    <i class="fas fa-eye"></i> Detail
+                                                    <i class="fas fa-eye"></i> DETAIL
                                                 </a>
                                                 <a href="{{ route('pembelian.edit', $item->id_pembelian) }}" class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-edit"></i> Edit
+                                                    <i class="fa fa-edit"></i> EDIT
                                                 </a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">
-                                                    <i class="fa fa-trash"></i> Hapus
+                                                    <i class="fa fa-trash"></i> HAPUS
                                                 </button>
                                             </form>
                                         </td>

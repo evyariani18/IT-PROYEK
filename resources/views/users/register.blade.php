@@ -56,7 +56,7 @@
         <h2 class="text-center">Register</h2>
         
         <!-- Form Register -->
-        <form action="{{ route('register') }}" method="POST">
+        <form action="{{ route('register.submit') }}" method="POST">
             @csrf
 
             <!-- Input Nama -->

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cetak Penjualan</title>
+    <title>Nota Penjualan</title>
 </head>
 <body>
-    <h1>Laporan Penjualan</h1>
+    <h3>Nota Penjualan</h3>
 
-    @foreach($penjualan as $item)
     <div>
-        <h3>Tanggal Penjualan: {{ \Carbon\Carbon::parse($item->tanggal_penjualan)->format('d/m/Y') }}</h3>
-        <p>Keterangan: {{ $item->keterangan }}</p>
+        <h3>Tanggal Penjualan: {{ \Carbon\Carbon::parse($penjualan->tanggal_penjualan)->format('d/m/Y') }}</h3>
+        <p>Kode Transaksi: {{ $penjualan->id_penjualan }}</p>
+        <p>Keterangan: {{ $penjualan->keterangan }}</p>
 
         <h4>Daftar Barang</h4>
         <table border="1" cellspacing="0" cellpadding="5">
@@ -20,7 +20,7 @@
                 <th>Jumlah</th>
                 <th>Subtotal</th>
             </tr>
-            @foreach($item->details as $detail)
+            @foreach($penjualan->details as $detail)
             <tr>
                 <td>{{ optional($detail->barang)->kode_barang }}</td>
                 <td>{{ optional($detail->barang)->name }}</td>
@@ -31,9 +31,7 @@
             @endforeach
         </table>
 
-        <h4>Total Harga: Rp. {{ number_format($item->total_harga, 0, ',', '.') }}</h4>
-        <hr>
+        <h4>Total Harga: Rp. {{ number_format($penjualan->total_harga, 0, ',', '.') }}</h4>
     </div>
-    @endforeach
 </body>
 </html>

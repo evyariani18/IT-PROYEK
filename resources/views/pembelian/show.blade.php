@@ -41,7 +41,7 @@
                 <div class="card-body">
                     <a href="{{ route('pembelian.index') }}" class="btn btn-secondary mb-3">Kembali</a>
                     <br>
-                    <a href="{{ route('pembelian.cetak_pembelian') }}" class="btn btn-danger">
+                    <a class="btn btn-sm btn-danger" href="{{ route('pembelian.cetak_pembelian', ['id_pembelian' => $pembelian->id_pembelian]) }}">
                       <i class="fas fa-file-pdf"></i> Export ke PDF</a>
                     <br>
                     <!-- Tampilkan informasi Penjualan -->

@@ -36,24 +36,36 @@
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars custom"></i></button>
     <!-- Navbar Search-->
-    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-        <div class="input-group">
-            <input class="form-control" type="text" placeholder="Cari..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-        </div>
-    </form>
+
     <!-- Navbar-->
-    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw custom"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">Pengaturan</a></li>
-                <li><a class="dropdown-item" href="#!">Aktivitas Log</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="/login" id="logoutButton">Logout</a></li>
-            </ul>
-        </li>
-    </ul>
+    <div class="d-flex justify-content-end w-100">
+        <a href="#" onclick="event.preventDefault(); 
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: 'Anda tidak akan bisa membatalkannya!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, logout!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('logoutForm').submit();
+                    Swal.fire({
+                        title: 'Logout berhasil!',
+                        text: 'Anda telah berhasil logout.',
+                        icon: 'success'
+                    });
+                }
+            });" class="btn btn-sm btn-danger">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+    </div>
+
+    <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -84,5 +96,52 @@
                 });
             }
         });
+    });
+</script>
+
+<script>
+    @if($message = Session::get('success'))
+        <script>
+            Swal.fire('{{$message}}');
+        </script>
+    @endif
+</script>
+<script>
+    $(document).ready(function() {
+        // Menangani pencarian saat tombol search diklik
+        $('#btnNavbarSearch').on('click', function() {
+            let query = $('#searchInput').val(); // Ambil input pencarian
+
+            if(query) {
+                search(query);
+            }
+        });
+
+        // Menangani pencarian ketika tombol Enter ditekan
+        $('#searchInput').on('keypress', function(e) {
+            if (e.which == 13) { // Jika tombol Enter ditekan
+                let query = $(this).val();
+                if(query) {
+                    search(query);
+                }
+            }
+        });
+
+        // Fungsi untuk melakukan pencarian
+        function search(query) {
+            $.ajax({
+                url: '/search', // Ganti dengan URL endpoint pencarian di server
+                method: 'GET',
+                data: { q: query },
+                success: function(response) {
+                    // Misalnya Anda bisa menampilkan hasil pencarian di suatu bagian halaman
+                    // Ganti #searchResults dengan elemen tempat hasil pencarian ditampilkan
+                    $('#searchResults').html(response);
+                },
+                error: function() {
+                    alert('Terjadi kesalahan dalam pencarian.');
+                }
+            });
+        }
     });
 </script>

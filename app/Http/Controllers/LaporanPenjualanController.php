@@ -11,15 +11,53 @@ use PDF;
 
 class LaporanPenjualanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $penjualan = Penjualan::with('details')->paginate(10);
-        return view('laporan_penjualan.index', compact('penjualan'));
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        // Query data dengan filter tanggal
+        $query = Penjualan::with('details');
+
+        if ($startDate) {
+            $query->where('tanggal_penjualan', '>=', $startDate);
+        }
+
+        if ($endDate) {
+            $query->where('tanggal_penjualan', '<=', $endDate);
+        }
+
+        // Paginate hasil query
+        $penjualan = $query->paginate(10);
+    
+        return view('laporan_penjualan.index', compact('penjualan', 'startDate', 'endDate'));
     }
-    public function cetak_pdf()
+
+    public function cetak_pdf(Request $request)
     {
-        $penjualan = Penjualan::with('details')->paginate(10);
-        $pdf = PDF::loadview('laporan_penjualan.penjualan_pdf', ['penjualan' => $penjualan]);
-        return $pdf->download('laporan_penjualan-pdf');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+    
+        // Query data dengan filter tanggal
+        $query = Penjualan::with('details');
+    
+        if ($startDate) {
+            $query->where('tanggal_penjualan', '>=', $startDate);
+        }
+    
+        if ($endDate) {
+            $query->where('tanggal_penjualan', '<=', $endDate);
+        }
+    
+        // Ambil data yang sudah difilter
+        $penjualan = $query->get(); // menggunakan get() karena kita tidak memerlukan paginasi di PDF
+    
+        // Cetak PDF
+        $pdf = PDF::loadview('laporan_penjualan.penjualan_pdf', ['penjualan' => $penjualan, 'startDate' => $startDate, 'endDate' => $endDate]);
+        
+        $filename = 'laporan_penjualan_' . $startDate . '_' . $endDate . '.pdf';
+    
+        return $pdf->download($filename);
     }
+    
 }

@@ -26,7 +26,6 @@
         <div class="col-md-12">
             <div>
                 <h3 class="text-center my-4">Data Merek Barang</h3>
-                <hr>
             </div>
             <div class="card border-10 shadow-sm rounded">
                 <div class="card-body">

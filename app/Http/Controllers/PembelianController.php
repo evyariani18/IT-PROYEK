@@ -13,7 +13,7 @@ use PDF;
 class PembelianController extends Controller
 {
 
-        public function index(Request $request)
+    public function index(Request $request)
     {
         // Ambil parameter filter tanggal
         $startDate = $request->input('start_date');
@@ -191,10 +191,10 @@ class PembelianController extends Controller
 
         return redirect()->route('pembelian.index')->with('success', 'Pembelian berhasil dihapus.');
     }
-    public function cetak_pdf()
+    public function cetak_pdf($id_pembelian)
     {
-        $pembelian = Pembelian::with('details')->get();
+        $pembelian = Pembelian::with('details.barang')->findOrFail($id_pembelian);;
         $pdf = PDF::loadview('pembelian.cetak_pembelian', ['pembelian' => $pembelian]);
-        return $pdf->download('cetak_pembelian-pdf');
+        return $pdf->download("nota_pembelian_{$id_pembelian}.pdf");
     }
 }

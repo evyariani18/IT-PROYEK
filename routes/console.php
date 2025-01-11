@@ -2,7 +2,10 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use App\Console\Commands\SendStockAlert;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote')->hourly();
+// Menambahkan command dengan signature dan closure
+Artisan::command('cek:stok', function () {
+    $this->call(SendStockAlert::class);
+})->everyMinute();  // Atur interval penjadwalan di sini
+

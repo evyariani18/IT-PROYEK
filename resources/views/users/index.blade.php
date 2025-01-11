@@ -35,16 +35,14 @@
             <hr>
             <div class="card border-10 shadow-sm rounded">
                 <div class="card-body">
-                <a href="{{ route('users.create') }}" class="btn btn-md btn-success mb-3">
-                <i class="fas fa-plus"></i> TAMBAH</a>
                     <table class="table table-sm table-bordered table-striped shadow-sm" style="background-color: #f8f9fa;">
                         <thead class="thead-style">
                             <tr>
                                 <th scope="col">NO</th>
                                 <th scope="col">NAMA PENGGUNA</th>
                                 <th scope="col">EMAIL</th>
-                                <th scope="col">USERNAME</th>
-                                <th scope="col">LEVEL</th>
+                                <th scope="col">PASSWORD</th>
+                                <th scope="col">ROLE</th>
                                 <th scope="col" style="width: 20%">AKSI</th>
                             </tr>
                         </thead>
@@ -54,8 +52,8 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
-                                    <td>{{ $item->username }}</td>
-                                    <td>{{ $item->level }}</td>
+                                    <td>{{ str_repeat('*', min(8, strlen($item->password))) }}</td>
+                                    <td>{{ $item->role }}</td>
                                     <td class="text-center">
                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('users.destroy', $item->id_user) }}" method="POST">
                                             <a href="{{ route('users.edit', $item->id_user) }}" class="btn btn-sm btn-primary">

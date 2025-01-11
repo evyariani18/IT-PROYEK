@@ -7,120 +7,130 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
         }
-        .container {
-            border: 2px solid #000;
-            padding: 20px;
-            margin: 20px;
-            border-radius: 5px;
-        }
-        .header-section {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .header-section img {
-            max-width: 130px;
-            height: auto;
-        }
-        .header-details {
-            text-align: left;
-            margin-bottom: 20px;
-        }
-        .thead-style {
-            background-color: #BC9F8B;
-            color: white;
-            text-align: center;
-        }
-        .tbody-style {
-            background-color: #E7E8D8;
-        }
-        .signature-section {
-            margin-top: 30px;
-            text-align: right;
-        }
-        .signature-line {
-            margin-top: 50px;
-            border-top: 1px solid black;
-            margin-bottom: 5px;
-        }
-        .signature-label {
-            margin-top: 5px;
-        }
-        table {
+
+        .table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
-        th, td {
+
+        .table th, .table td {
+            border: 1px solid #000;
             padding: 8px;
-            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .text-center {
             text-align: center;
         }
-        td {
-            background-color: #F8F9FA;
+
+        .text-right {
+            text-align: right;
         }
+
+        .date-range {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* Style for the header box */
+        .header-box {
+            border: 1px solid #000;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .header-box h3 {
+            margin: 0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .header-box h4 {
+            margin: 0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .header-box p {
+            margin: 5px 0;
+            text-align: center;
+        }
+
+        .header-box .address {
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Line before 'Laporan Penjualan' */
+        .line {
+            border-top: 2px solid black;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
     </style>
 </head>
 <body>
 
-<div class="container">
     <!-- Header Section -->
-    <div class="header-section">
-    <img src="{{ asset('storage/images/logo.png') }}" alt="Logo Toko Shadad" style="width: 130px; height: auto;">
+    <div class="header-box">
         <h3>Perlengkapan Rumah Toko Shadad</h3>
         <p>Jl. Datu Daim Pasar Tapandang Berseri I Blok G No 02 Tanah Laut Kalimantan Selatan</p>
+        <p>Telepon: (021) 123456789</p>
+        <div class="line"></div>
+        <h4>Laporan Penjualan</h4>
+        <div class="date-range">
+            <p>Periode: {{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</p>
+        </div>
     </div>
 
-    <!-- Kode Transaksi dan Tanggal -->
-    <div class="header-details">
-        <p><strong>Kode Transaksi:</strong> {{ $penjualan->first()->id_penjualan ?? '---' }}</p>
-        <p><strong>Tanggal:</strong> {{ now()->format('d-m-Y') }}</p>
-    </div>
-
-    <!-- Tabel Penjualan -->
-    <table>
-        <thead class="thead-style">
+    <table class="table">
+        <thead>
             <tr>
-                <th>NO</th>
-                <th>KODE BARANG</th>
-                <th>NAMA BARANG</th>
-                <th>QTY</th>
-                <th>HARGA SATUAN</th>
-                <th>TOTAL</th>
+                <th>No</th>
+                <th>Kode Transaksi</th>
+                <th>Tanggal Penjualan</th>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
+                <th>Qty</th>
+                <th>Harga Satuan</th>
+                <th>Subtotal</th>
+                <th>Total</th>
             </tr>
         </thead>
-        <tbody class="tbody-style">
-            @php $grandTotal = 0; @endphp
-            @foreach ($penjualan as $item)
+        <tbody>
+            @php
+                $grandTotal = 0;
+                $no = 1;
+            @endphp
+            @foreach ($penjualan as $index => $item)
                 @foreach ($item->details as $detail)
-                    @php 
-                        $subtotal = $detail->jumlah * $detail->harga_satuan; 
+                    @php
+                        $subtotal = $detail->jumlah * $detail->harga_satuan;
                         $grandTotal += $subtotal;
                     @endphp
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $no++ }}</td>
+                        <td>{{ $detail->id_penjualan }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->tanggal_penjualan)->format('d-m-Y') }}</td>
                         <td>{{ $detail->barang->kode_barang }}</td>
                         <td>{{ $detail->barang->name }}</td>
                         <td>{{ $detail->jumlah }}</td>
-                        <td>Rp {{ number_format($detail->harga_satuan, 0, ',', '.') }}</td>
-                        <td>Rp {{ number_format($subtotal, 0, ',', '.') }}</td>
+                        <td class="text-right">Rp {{ number_format($detail->harga_satuan, 0, ',', '.') }}</td>
+                        <td class="text-right">Rp {{ number_format($subtotal, 0, ',', '.') }}</td>
+                        <td class="text-right">Rp {{ number_format($grandTotal, 0, ',', '.') }}</td>
                     </tr>
                 @endforeach
             @endforeach
-            <tr>
-                <td colspan="5" style="text-align:right; font-weight:bold;">Total:</td>
-                <td><strong>Rp {{ number_format($grandTotal, 0, ',', '.') }}</strong></td>
-            </tr>
         </tbody>
     </table>
-
-    <!-- Tanda Tangan -->
-    <div class="signature-section">
-        <div class="signature-line"></div>
-        <p class="signature-label">Kasir</p>
-    </div>
-</div>
 
 </body>
 </html>

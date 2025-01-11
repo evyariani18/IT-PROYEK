@@ -11,23 +11,8 @@ use Illuminate\Http\Request;
 
 class Dashboard2Controller extends Controller
 {
-    public function home(){
-        // Akses data dari model
-        $brands = Brand::all();
-        $categories = Category::all();
-        $barangMasuk = Barang_Masuk::all();
-        $transaksi = Transaksi::all();
-        $barangs = Barang::all();
-
-        // Mengganti nama variabel yang tidak konsisten
-        return view('dashboard', compact('brands', 'categories', 'barangMasuk', 'transaksi', 'barangs'));
-    }
-
-    public function tentang(){
-        return view('tentang');
-    }
-
-    public function kontak(){
-        return view('kontak');
+    public function index()
+    {
+        return view('dashboard2');
     }
 }
