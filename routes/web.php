@@ -41,6 +41,10 @@ Route::get('google-drive/upload', [GoogleDriveController::class, 'showUploadForm
 Route::post('google-drive/upload', [GoogleDriveController::class, 'upload'])->name('google-drive.upload');
 Route::get('google-drive/files', [GoogleDriveController::class, 'listFiles'])->name('google-drive.files');
 
+Route::get('/', function () {
+    return redirect()->route('pengguna.login'); // Redirect ke halaman login
+});
+
 Route::middleware(['guest'])->group(function(){
     Route::get('/login', [LoginController::class, 'index'])->name('pengguna.login');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
